@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Assets/Models/pavement1material.material" type="Material" id=1]
 
-
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
 surfaces/0 = {
