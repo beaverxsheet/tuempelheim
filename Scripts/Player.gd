@@ -4,6 +4,8 @@ const MOVE_VEL = 10
 const MOUSE_SENS = 0.3
 const GRAV = 5
 
+onready var fps = $CanvasLayer/Label
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass
@@ -20,6 +22,7 @@ func _input(event):
 func _process(delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
+	fps.text = str(Engine.get_frames_per_second())
 
 func _physics_process(delta):
 	var move_vec = Vector3()
