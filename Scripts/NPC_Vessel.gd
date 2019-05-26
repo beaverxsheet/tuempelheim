@@ -1,11 +1,32 @@
 extends "res://Scripts/Sprite3D_controls.gd"
 
+
 onready var animplayer_child = get_parent().get_node("Viewport/TestTyp/AnimationPlayer")
+onready var player_node = get_Player()
 
 func _process(delta):
-#	print(get_Sprite_angle())
-#	print(get_Distance(get_Player()))
-	if get_Distance(get_Player()) < 30:
+#	if get_Distance(player_node) < 30:
+#		animplayer_child.play("Dance")
+#	else:
+#		animplayer_child.play("Wave")
+	pass
+
+
+func _on_ChatArea_body_entered(body):
+	if body == player_node:
+		print('Hello there')
+
+
+func _on_ChatArea_body_exited(body):
+	if body == player_node:
+		print('Till we meet again')
+
+
+func _on_WideArea_body_entered(body):
+	if body == player_node:
 		animplayer_child.play("Dance")
-	else:
+
+
+func _on_WideArea_body_exited(body):
+	if body == player_node:
 		animplayer_child.play("Wave")
