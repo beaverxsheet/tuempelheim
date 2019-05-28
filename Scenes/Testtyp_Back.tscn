@@ -5,6 +5,11 @@
 [node name="Testtyp_Back" type="Node2D"]
 
 [node name="Polygons" type="Node2D" parent="."]
+position = Vector2( 1.16632, 1.16635 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="LegL" type="Polygon2D" parent="Polygons"]
 position = Vector2( -386.904, -765.857 )
@@ -46,5 +51,89 @@ polygons = [ PoolIntArray( 7, 8, 9, 6 ), PoolIntArray( 6, 20, 19, 5 ), PoolIntAr
 internal_vertex_count = 4
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Hip" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( 15.1052, -324.76 )
+rest = Transform2D( 1, 0, 0, 1, 15.1052, -324.76 )
+
+[node name="Chest" type="Bone2D" parent="Skeleton2D/Hip"]
+position = Vector2( -1.34201, -133.441 )
+rest = Transform2D( 1, 0, 0, 1, -1.34201, -133.441 )
+
+[node name="ArmL" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
+position = Vector2( -94.474, -39.6558 )
+rotation = 2.59248
+scale = Vector2( 0.664566, 0.725676 )
+rest = Transform2D( -0.566865, 0.346859, -0.378755, -0.618992, -94.474, -39.6558 )
+
+[node name="ForeArmL" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmL"]
+position = Vector2( 148.704, 32.6868 )
+scale = Vector2( 1.67567, 1.41719 )
+rest = Transform2D( 1.67567, 0, 0, 1.41719, 148.704, 32.6868 )
+
+[node name="HandL" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmL/ForeArmL"]
+position = Vector2( 39.5654, 9.40842 )
+rotation = 0.261799
+scale = Vector2( 2.1241, 2.43829 )
+rest = Transform2D( 2.05173, 0.549757, -0.631076, 2.35521, 39.5654, 9.40842 )
+
+[node name="ArmR" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
+position = Vector2( 99.1394, -45.4875 )
+rotation = 0.0153066
+scale = Vector2( 0.664566, 0.725676 )
+rest = Transform2D( 0.664488, 0.0101718, -0.0111072, 0.725591, 99.1394, -45.4875 )
+
+[node name="ForeArmR" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmR"]
+position = Vector2( 148.704, 32.6868 )
+scale = Vector2( 1.67567, 1.41719 )
+rest = Transform2D( 1.67567, 0, 0, 1.41719, 148.704, 32.6868 )
+
+[node name="HandR" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmR/ForeArmR"]
+position = Vector2( 39.5654, 9.40842 )
+rotation = 0.261799
+scale = Vector2( 2.1241, 2.43829 )
+rest = Transform2D( 2.05173, 0.549757, -0.631076, 2.35521, 39.5654, 9.40842 )
+
+[node name="Neck" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
+position = Vector2( -8.1622, -62.5769 )
+rotation = -1.62741
+scale = Vector2( 1.53705, 1.81947 )
+rest = Transform2D( -0.0869786, -1.53458, 1.81655, -0.10296, -8.1622, -62.5769 )
+
+[node name="Head" type="Bone2D" parent="Skeleton2D/Hip/Chest/Neck"]
+position = Vector2( 15.9055, 0.76157 )
+rotation = 0.0562979
+scale = Vector2( 4.10692, -10.412 )
+rest = Transform2D( 4.10041, 0.231089, 0.585866, -10.3955, 15.9055, 0.76157 )
+
+[node name="LegR" type="Bone2D" parent="Skeleton2D/Hip"]
+position = Vector2( 36.1761, 37.6833 )
+rotation = 1.54511
+scale = Vector2( 5.69288, -5.67766 )
+rest = Transform2D( 0.146238, 5.691, 5.67578, -0.145847, 36.1761, 37.6833 )
+
+[node name="ShinR" type="Bone2D" parent="Skeleton2D/Hip/LegR"]
+position = Vector2( 24.9487, 2.01292 )
+rest = Transform2D( 1, 0, 0, 1, 24.9487, 2.01292 )
+
+[node name="FootR" type="Bone2D" parent="Skeleton2D/Hip/LegR/ShinR"]
+position = Vector2( 20.4218, 1.06726 )
+scale = Vector2( 0.341393, 0.99419 )
+rest = Transform2D( 0.341393, 0, 0, 0.99419, 20.4218, 1.06726 )
+
+[node name="LegL" type="Bone2D" parent="Skeleton2D/Hip"]
+position = Vector2( -33.1613, 37.6833 )
+rotation = 1.68304
+scale = Vector2( 5.69288, -5.67766 )
+rest = Transform2D( -0.637637, 5.65706, 5.64193, 0.635932, -33.1613, 37.6833 )
+
+[node name="ShinL" type="Bone2D" parent="Skeleton2D/Hip/LegL"]
+position = Vector2( 24.9487, 2.01292 )
+rest = Transform2D( 1, 0, 0, 1, 24.9487, 2.01292 )
+
+[node name="FootL" type="Bone2D" parent="Skeleton2D/Hip/LegL/ShinL"]
+position = Vector2( 20.4218, 1.06726 )
+scale = Vector2( 0.341393, 0.99419 )
+rest = Transform2D( 0.341393, 0, 0, 0.99419, 20.4218, 1.06726 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
