@@ -5,11 +5,14 @@ onready var animplayer_child = get_parent().get_node("Viewport/TestTyp/Animation
 onready var player_node = get_Player()
 
 func _process(delta):
-#	if get_Distance(player_node) < 30:
-#		animplayer_child.play("Dance")
-#	else:
-#		animplayer_child.play("Wave")
-	pass
+	if get_Sprite_angle() == 2:
+		get_parent().get_node("Viewport/TestTyp").hide()
+		get_parent().get_node("Viewport/Testtyp_Back").show()
+	else:
+		get_parent().get_node("Viewport/TestTyp").show()
+		get_parent().get_node("Viewport/Testtyp_Back").hide()
+	
+	
 
 
 func _on_ChatArea_body_entered(body):

@@ -838,9 +838,10 @@ uv = PoolVector2Array( 139.894, 381.383, 137.234, 302.128, 135.106, 218.085, 97.
 bones = [ NodePath("Hip"), PoolRealArray( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ), NodePath("Hip/Chest"), PoolRealArray( 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0 ), NodePath("Hip/Chest/ArmL"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/ArmL/ForearmL"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/ArmL/ForearmL/HandL"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/ArmR"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/ArmR/ForearmR"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/ArmR/ForearmR/HandR"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/LegL"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/LegL/ShinL"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/LegL/ShinL/FootL"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/LegR"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/LegR/ShinR"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Hip/LegR/ShinR/FootR"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
+editor/display_folded = true
 
 [node name="Hip" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 2.44536, -514.585 )
+position = Vector2( 2.44536, -345.401 )
 rest = Transform2D( 1, 0, 0, 1, 2.44536, -345.401 )
 
 [node name="Chest" type="Bone2D" parent="Skeleton2D/Hip"]
@@ -866,7 +867,7 @@ rest = Transform2D( 1, 0, 0, 1, 17.0488, -0.000165788 )
 
 [node name="ArmR" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
 position = Vector2( 71.0911, -47.6899 )
-rotation = -1.41666
+rotation = -1.38012
 rest = Transform2D( 1, 0, 0, 1, 70.0911, -97.6899 )
 
 [node name="ForearmR" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmR"]
