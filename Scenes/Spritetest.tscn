@@ -24,7 +24,7 @@ viewport_path = NodePath("Viewport")
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.27707, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -5.60533e-08, -1.28235, 0, 1, -4.37114e-08, 0, -0.443239, 0 )
+transform = Transform( 1, 0, 0, 0, -5.60533e-08, -1.28235, 0, 1, -4.37114e-08, 0, -1.22174, 0 )
 shape = SubResource( 1 )
 
 [node name="Viewport" type="Viewport" parent="."]
@@ -41,7 +41,7 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 150, 750 )
 
 [node name="NPC_Vessel" type="Sprite3D" parent="."]
-transform = Transform( 1.43912, 0, 0, 0, 1.22601, 0, 0, 0, 1, 0.482493, 0, 0 )
+transform = Transform( 1.43912, 0, 0, 0, 1.22601, 0, 0, 0, 1, -0.657407, 0, 0 )
 material_override = SubResource( 2 )
 transparent = false
 texture = SubResource( 3 )
@@ -51,12 +51,14 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="ChatArea"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+visible = false
 shape = SubResource( 4 )
 
 [node name="WideArea" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="WideArea"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+visible = false
 shape = SubResource( 4 )
 [connection signal="body_entered" from="ChatArea" to="NPC_Vessel" method="_on_ChatArea_body_entered"]
 [connection signal="body_exited" from="ChatArea" to="NPC_Vessel" method="_on_ChatArea_body_exited"]
