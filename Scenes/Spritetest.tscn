@@ -11,15 +11,17 @@ flags_transparent = true
 flags_unshaded = true
 flags_albedo_tex_force_srgb = true
 params_billboard_mode = 2
+params_billboard_keep_scale = true
 params_use_alpha_scissor = true
 params_alpha_scissor_threshold = 0.08
 
-[sub_resource type="ViewportTexture" id=5]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Viewport")
 
 [sub_resource type="SphereShape" id=4]
 
 [node name="SpriteTest" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.27707, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -5.60533e-08, -1.28235, 0, 1, -4.37114e-08, 0, -0.443239, 0 )
@@ -39,10 +41,10 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 150, 750 )
 
 [node name="NPC_Vessel" type="Sprite3D" parent="."]
-transform = Transform( 1.43912, 0, 0, 0, 0.534375, 0, 0, 0, 1, 0.482493, 0, 0 )
+transform = Transform( 1.43912, 0, 0, 0, 1.22601, 0, 0, 0, 1, 0.482493, 0, 0 )
 material_override = SubResource( 2 )
 transparent = false
-texture = SubResource( 5 )
+texture = SubResource( 3 )
 script = ExtResource( 3 )
 
 [node name="ChatArea" type="Area" parent="."]

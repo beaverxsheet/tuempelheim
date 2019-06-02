@@ -5,13 +5,12 @@ onready var animplayer_child = get_parent().get_node("Viewport/TestTyp/Animation
 onready var player_node = get_Player()
 
 func _process(delta):
-	if get_Sprite_angle() == 2:
+	if get_Sprite_angle() == 0:
 		get_parent().get_node("Viewport/TestTyp").hide()
 		get_parent().get_node("Viewport/Testtyp_Back").show()
 	else:
 		get_parent().get_node("Viewport/TestTyp").show()
 		get_parent().get_node("Viewport/Testtyp_Back").hide()
-	
 	
 
 
