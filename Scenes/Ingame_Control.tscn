@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackgroundPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -115.0
+margin_top = -25.5
+margin_right = 115.0
+margin_bottom = 25.5
+
+[node name="Header" type="Label" parent="BackgroundPanel/VBoxContainer"]
+margin_right = 230.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 1 )
+text = "Inventory"
+align = 1
+percent_visible = -0.111111
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackgroundPanel/VBoxContainer"]
+margin_top = 55.0
+margin_right = 230.0
+margin_bottom = 79.0
+
+[node name="Pencil" type="Label" parent="BackgroundPanel/VBoxContainer/HBoxContainer"]
+margin_right = 68.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 2 )
+text = "Pencil:"
+
+[node name="Amount" type="Label" parent="BackgroundPanel/VBoxContainer/HBoxContainer"]
+margin_left = 72.0
+margin_right = 86.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+
+[node name="Add_to" type="Button" parent="BackgroundPanel/VBoxContainer/HBoxContainer"]
+margin_left = 90.0
+margin_right = 150.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "More"
+
+[node name="Remove_from" type="Button" parent="BackgroundPanel/VBoxContainer/HBoxContainer"]
+margin_left = 142.0
+margin_right = 202.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "Less"
