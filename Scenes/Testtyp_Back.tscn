@@ -932,5 +932,6 @@ rest = Transform2D( 0.341393, 0, 0, 0.99419, 20.4218, 1.06726 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Wave"
+playback_default_blend_time = 0.5
 anims/Dance = SubResource( 2 )
 anims/Wave = SubResource( 1 )
