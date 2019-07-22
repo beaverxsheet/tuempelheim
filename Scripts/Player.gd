@@ -42,6 +42,14 @@ func _process(delta):
 	elif Input.is_action_just_pressed("exit") and not cam_on:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		cam_on = true
+	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("InventoryGUI").visible:
+		get_parent().get_node("InventoryGUI").show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		cam_on = false
+	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("InventoryGUI").visible:
+		get_parent().get_node("InventoryGUI").hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		cam_on = true
 	if Input.is_action_pressed("end"):
 		get_tree().quit()
 	fps.text = str(Engine.get_frames_per_second())
