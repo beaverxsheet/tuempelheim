@@ -97,6 +97,11 @@ func _physics_process(delta):
 				globals.change_item_amount(1,res.collider.ID)
 				res.collider.pickup()
 		find = false
+	if res.has("position"):
+		if("type" in res.collider):
+			get_node("../Control").item_in_crosshairs = res.collider.ID
+	else:
+		get_node("../Control").item_in_crosshairs = null
 
 func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
