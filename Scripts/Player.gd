@@ -3,6 +3,8 @@ extends KinematicBody
 const MOVE_VEL = 10
 const MOUSE_SENS = 0.3
 const GRAV = 5
+const RAY_LEN = 1000
+
 
 var cam_on = true
 
@@ -16,6 +18,10 @@ var shoot_origin = Vector3()
 var shoot_to = Vector3()
 var shooting = 0
 var raycast_result = null
+
+var from = Vector3()
+var to = Vector3()
+var find = false
 
 
 func _ready():
@@ -33,6 +39,14 @@ func _input(event):
 			rotation_degrees.x -= MOUSE_SENS * event.relative.y
 		if rotation_degrees.x >= 85: rotation_degrees.x = 85
 		if rotation_degrees.x <= -85: rotation_degrees.x = -85
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+		var camera = $Camera
+		from = camera.project_ray_origin(event.position)
+		to = from + camera.project_ray_normal(event.position) * RAY_LEN
+		find = true
+		print("click")
+	else:
+		find = false
 
 
 func _process(delta):
@@ -51,10 +65,10 @@ func _process(delta):
 	fps.text = str(Engine.get_frames_per_second())
 	
 	# Raycast
-	shoot_origin = $Camera.project_ray_origin(Vector2(camera_width_center, camera_height_center))
-	shoot_to = shoot_origin + $Camera.project_ray_normal(Vector2(camera_width_center, camera_height_center))*ability_range
+	#shoot_origin = $Camera.project_ray_origin(Vector2(camera_width_center, camera_height_center))
+	#shoot_to = shoot_origin + $Camera.project_ray_normal(Vector2(camera_width_center, camera_height_center))*ability_range
 	
-	raycast_result = get_world().direct_space_state.intersect_ray(shoot_origin, shoot_to, [self])
+	#raycast_result = get_world().direct_space_state.intersect_ray(shoot_origin, shoot_to, [self])
 	
 
 func _physics_process(delta):
@@ -72,6 +86,13 @@ func _physics_process(delta):
 	move_vec -= Vector3(0,GRAV,0)
 	move_and_slide(move_vec)
 	#move_and_collide(move_vec*delta)
+	var space_state = get_world().direct_space_state
+	var res = space_state.intersect_ray(from,to,[self])
+	if find:
+		if res.has("position"):
+			if("type" in res.collider):
+				print(res.collider.type)
+		find = false
 
 func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
