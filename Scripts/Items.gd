@@ -1,6 +1,7 @@
 extends StaticBody
 
-var type = "normal"
+var type = "Cup"
+var ID = 1
 
 func pickup():
-	pass
+	queue_free()

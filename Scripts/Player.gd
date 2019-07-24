@@ -23,6 +23,8 @@ var from = Vector3()
 var to = Vector3()
 var find = false
 
+onready var globals = get_node("/root/globals")
+
 
 func _ready():
 	# Connect to viewport_size_change
@@ -91,7 +93,9 @@ func _physics_process(delta):
 	if find:
 		if res.has("position"):
 			if("type" in res.collider):
-				print(res.collider.type)
+				print(res.collider.ID)
+				globals.change_item_amount(1,res.collider.ID)
+				res.collider.pickup()
 		find = false
 
 func viewport_size_changed():
