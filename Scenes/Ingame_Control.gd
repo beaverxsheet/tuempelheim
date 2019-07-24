@@ -22,12 +22,26 @@ func _process(delta):
 	$BackgroundPanel/VBoxContainer/HBoxContainer/Amount.text = String(pencil_amount)
 
 
-func change_item_amount(change, item_id):
+func change_item_amount(change, item_id, overrideNegative=false):
 	var item = itemArray[item_id]
 	if inventoryContents.get(item, false):
-		inventoryContents[item] = inventoryContents[item] + change
+		var newValue = inventoryContents[item] + change
+		if newValue < 0 and !overrideNegative:
+			return "Cannot go below zero"
+		elif newValue < 0 and overrideNegative:
+			inventoryContents[item] = newValue
+			return "Went below zero due to override"
+		else:
+			inventoryContents[item] = newValue
 	else:
-		inventoryContents[item] = 0 + change
+		var newValue = 0 + change
+		if newValue < 0 and !overrideNegative:
+			return "Cannot go below zero"
+		elif newValue < 0 and overrideNegative:
+			inventoryContents[item] = newValue
+			return "Went below zero due to override"
+		else:
+			inventoryContents[item] = newValue
 		
 func check_item_amount(item_id):
 	var item = itemArray[item_id]
