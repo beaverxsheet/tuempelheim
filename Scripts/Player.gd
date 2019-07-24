@@ -50,20 +50,16 @@ func _input(event):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("exit") and cam_on:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		cam_on = false
-	elif Input.is_action_just_pressed("exit") and not cam_on:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		cam_on = true
+	if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("InventoryGUI").visible:
+		capture_mouse_mode(false)
+	elif Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("InventoryGUI").visible:
+		capture_mouse_mode(true)
 	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("InventoryGUI").visible:
 		get_parent().get_node("InventoryGUI").show()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		cam_on = false
+		capture_mouse_mode(false)
 	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("InventoryGUI").visible:
 		get_parent().get_node("InventoryGUI").hide()
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		cam_on = true
+		capture_mouse_mode(true)
 	if Input.is_action_pressed("end"):
 		get_tree().quit()
 	fps.text = str(Engine.get_frames_per_second())
@@ -102,3 +98,24 @@ func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
 	camera_width_center = OS.get_window_size().x / 2
 	camera_height_center = OS.get_window_size().y / 2
+	
+	
+func capture_mouse_mode(set=true, toggle=false):
+	# Change mouse mode
+	if toggle:
+		# Toggle mouse mode
+		if cam_on:
+			cam_on = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		elif !cam_on:
+			cam_on = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif !toggle:
+		# Set mouse mode regardless of current state
+		if set:
+			cam_on = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		elif !set:
+			cam_on = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	return cam_on
