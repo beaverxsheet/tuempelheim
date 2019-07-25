@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Ingame_Control.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Ingame_Control.gd" type="Script" id=1]
 [ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=4]
+
 
 [node name="Control" type="Control"]
 anchor_right = 1.0

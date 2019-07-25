@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/HUD_Overlay.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/HUD_Overlay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Crosshair.png" type="Texture" id=2]
-[ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scripts/HUD_Item_Infobox.gd" type="Script" id=3]
+[ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -33,6 +34,7 @@ anchor_bottom = 1.0
 margin_left = -100.0
 margin_top = -94.0
 margin_right = 100.0
+script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
 margin_left = 7.0
@@ -43,7 +45,7 @@ margin_bottom = 87.0
 [node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
 margin_right = 186.0
 margin_bottom = 24.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "ITEM"
 align = 1
 
@@ -61,7 +63,7 @@ margin_bottom = 52.0
 [node name="Weight" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 75.0
 margin_bottom = 24.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Weight"
 align = 1
 
@@ -69,7 +71,7 @@ align = 1
 margin_top = 28.0
 margin_right = 75.0
 margin_bottom = 52.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
 
@@ -81,7 +83,7 @@ margin_bottom = 52.0
 [node name="Value" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 margin_right = 73.0
 margin_bottom = 24.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Value   "
 align = 1
 
@@ -89,6 +91,6 @@ align = 1
 margin_top = 28.0
 margin_right = 73.0
 margin_bottom = 52.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
