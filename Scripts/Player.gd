@@ -55,9 +55,11 @@ func _process(delta):
 		capture_mouse_mode(true)
 	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("InventoryGUI").visible: # Show inventory
 		get_parent().get_node("InventoryGUI").show()
+		get_node("../Control").inventory_shown = true
 		capture_mouse_mode(false)
 	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("InventoryGUI").visible: # Hide inventory
 		get_parent().get_node("InventoryGUI").hide()
+		get_node("../Control").inventory_shown = false
 		capture_mouse_mode(true)
 	if Input.is_action_pressed("end"): # Quit
 		get_tree().quit()
@@ -79,27 +81,27 @@ func _physics_process(delta):
 	move_vec -= Vector3(0,GRAV,0)
 	move_and_slide(move_vec)
 	#move_and_collide(move_vec*delta)
-	var mouse_pos = get_viewport().get_mouse_position()
-	from = $Camera.project_ray_origin(mouse_pos)
-	to = from + $Camera.project_ray_normal(mouse_pos) * RAY_LEN
-	var space_state = get_world().direct_space_state
-	var res = space_state.intersect_ray(from,to,[self])
-	
-	# Find ID of object that has been acted upon with mouseclick
-	if find:
-		if res.has("position"):
-			if("type" in res.collider):
-				print(res.collider.ID)
-				globals.change_item_amount(1,res.collider.ID)
-				res.collider.pickup()
-		find = false
+	if cam_on:
+		var mouse_pos = get_viewport().get_mouse_position()
+		from = $Camera.project_ray_origin(mouse_pos)
+		to = from + $Camera.project_ray_normal(mouse_pos) * RAY_LEN
+		var space_state = get_world().direct_space_state
+		var res = space_state.intersect_ray(from,to,[self])
 		
-	# Similar code but run continuously, connects to HUD overlay
-	if res.has("position"):
-		if("type" in res.collider):
+		# Find ID of object that has been acted upon with mouseclick
+		if find:
+			if res.has("position"):
+				if("type" in res.collider):
+					print(res.collider.ID)
+					globals.change_item_amount(1,res.collider.ID)
+					res.collider.pickup()
+			find = false
+			
+		# Similar code but run continuously, connects to HUD overlay
+		if res.has("position") and ("type" in res.collider):
 			get_node("../Control").item_in_crosshairs = res.collider.ID
-	else:
-		get_node("../Control").item_in_crosshairs = null
+		else:
+			get_node("../Control").item_in_crosshairs = null
 
 func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
