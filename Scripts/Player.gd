@@ -49,17 +49,17 @@ func _input(event):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("InventoryGUI").visible:
+	if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("InventoryGUI").visible: # Uncapture mouse
 		capture_mouse_mode(false)
-	elif Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("InventoryGUI").visible:
+	elif Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("InventoryGUI").visible: # Capture mouse
 		capture_mouse_mode(true)
-	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("InventoryGUI").visible:
+	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("InventoryGUI").visible: # Show inventory
 		get_parent().get_node("InventoryGUI").show()
 		capture_mouse_mode(false)
-	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("InventoryGUI").visible:
+	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("InventoryGUI").visible: # Hide inventory
 		get_parent().get_node("InventoryGUI").hide()
 		capture_mouse_mode(true)
-	if Input.is_action_pressed("end"):
+	if Input.is_action_pressed("end"): # Quit
 		get_tree().quit()
 	fps.text = str(Engine.get_frames_per_second())
 
@@ -84,6 +84,8 @@ func _physics_process(delta):
 	to = from + $Camera.project_ray_normal(mouse_pos) * RAY_LEN
 	var space_state = get_world().direct_space_state
 	var res = space_state.intersect_ray(from,to,[self])
+	
+	# Find ID of object that has been acted upon with mouseclick
 	if find:
 		if res.has("position"):
 			if("type" in res.collider):
@@ -91,6 +93,8 @@ func _physics_process(delta):
 				globals.change_item_amount(1,res.collider.ID)
 				res.collider.pickup()
 		find = false
+		
+	# Similar code but run continuously, connects to HUD overlay
 	if res.has("position"):
 		if("type" in res.collider):
 			get_node("../Control").item_in_crosshairs = res.collider.ID
