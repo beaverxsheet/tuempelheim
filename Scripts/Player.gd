@@ -42,9 +42,6 @@ func _input(event):
 		if rotation_degrees.x >= 85: rotation_degrees.x = 85
 		if rotation_degrees.x <= -85: rotation_degrees.x = -85
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		var camera = $Camera
-		from = camera.project_ray_origin(event.position)
-		to = from + camera.project_ray_normal(event.position) * RAY_LEN
 		find = true
 		print("click")
 	else:
@@ -65,13 +62,7 @@ func _process(delta):
 	if Input.is_action_pressed("end"):
 		get_tree().quit()
 	fps.text = str(Engine.get_frames_per_second())
-	
-	# Raycast
-	#shoot_origin = $Camera.project_ray_origin(Vector2(camera_width_center, camera_height_center))
-	#shoot_to = shoot_origin + $Camera.project_ray_normal(Vector2(camera_width_center, camera_height_center))*ability_range
-	
-	#raycast_result = get_world().direct_space_state.intersect_ray(shoot_origin, shoot_to, [self])
-	
+
 
 func _physics_process(delta):
 	var move_vec = Vector3()
@@ -88,6 +79,9 @@ func _physics_process(delta):
 	move_vec -= Vector3(0,GRAV,0)
 	move_and_slide(move_vec)
 	#move_and_collide(move_vec*delta)
+	var mouse_pos = get_viewport().get_mouse_position()
+	from = $Camera.project_ray_origin(mouse_pos)
+	to = from + $Camera.project_ray_normal(mouse_pos) * RAY_LEN
 	var space_state = get_world().direct_space_state
 	var res = space_state.intersect_ray(from,to,[self])
 	if find:
