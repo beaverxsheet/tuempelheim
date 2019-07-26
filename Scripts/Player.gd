@@ -24,6 +24,7 @@ var to = Vector3()
 var find = false
 
 onready var globals = get_node("/root/globals")
+onready var scene_changer = get_node("/root/Change_Scene")
 
 
 func _ready():
@@ -63,6 +64,8 @@ func _process(delta):
 		capture_mouse_mode(true)
 	if Input.is_action_pressed("end"): # Quit
 		get_tree().quit()
+	if Input.is_action_just_pressed("ui_up") and not get_parent().get_node("InventoryGUI").visible: # Switch scene tester
+		scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
 	fps.text = str(Engine.get_frames_per_second())
 
 
@@ -90,11 +93,12 @@ func _physics_process(delta):
 		
 		# Find ID of object that has been acted upon with mouseclick
 		if find:
-			if res.has("position"):
-				if("type" in res.collider):
-					print(res.collider.ID)
-					globals.change_item_amount(1,res.collider.ID)
-					res.collider.pickup()
+			if res.has("position") and ("type" in res.collider):
+				print(res.collider.ID)
+				globals.change_item_amount(1,res.collider.ID)
+				res.collider.pickup()
+			if res.has("position") and ("is_world_interactor" in res.collider):
+				res.collider.change_scene_onclick()
 			find = false
 			
 		# Similar code but run continuously, connects to HUD overlay

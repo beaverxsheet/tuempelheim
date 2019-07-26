@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Ingame_Item",
 "language": "GDScript",
 "path": "res://Scripts/ITEMS_baseclass.gd"
+}, {
+"base": "StaticBody",
+"class": "WorldInteractor",
+"language": "GDScript",
+"path": "res://Scripts/WORLDINTERACTOR_baseclass.gd"
 } ]
 _global_script_class_icons={
-"Ingame_Item": ""
+"Ingame_Item": "",
+"WorldInteractor": ""
 }
 
 [application]
@@ -27,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 globals="*res://Scripts/globals.gd"
+Change_Scene="*res://Scenes/Change_Scene.tscn"
 
 [display]
 
