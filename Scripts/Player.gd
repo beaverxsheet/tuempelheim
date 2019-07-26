@@ -93,11 +93,10 @@ func _physics_process(delta):
 		
 		# Find ID of object that has been acted upon with mouseclick
 		if find:
-			if res.has("position"):
-				if("type" in res.collider):
-					print(res.collider.ID)
-					globals.change_item_amount(1,res.collider.ID)
-					res.collider.pickup()
+			if res.has("position") and ("type" in res.collider):
+				print(res.collider.ID)
+				globals.change_item_amount(1,res.collider.ID)
+				res.collider.pickup()
 			find = false
 			
 		# Similar code but run continuously, connects to HUD overlay
