@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset>
+	<contributor>
+		<author>Anonymous</author>
+		<authoring_tool>Collada Exporter for Blender 2.6+, by Juan Linietsky (juan@codenix.com)</authoring_tool>
+	</contributor>
+	<created>2019-07-26T09:28:37Z</created>
+	<modified>2019-07-26T09:28:37Z</modified>
+	<unit meter="1.0" name="meter"/>
+	<up_axis>Z_UP</up_axis>
+</asset>
+<library_images>
+	<image id="id-image-4" name="Doortex">
+		<init_from>images/Doortex.png</init_from>
+	</image>
+</library_images>
+<library_effects>
+	<effect id="id-fx-3" name="Doormaterial-fx">
+		<profile_COMMON>
+			<newparam sid="id-fx_surf-5">
+				<surface type="2D">
+					<init_from>id-image-4</init_from>
+					<format>A8R8G8B8</format>
+				</surface>
+			</newparam>
+			<newparam sid="id-fx_sampler-6">
+				<sampler2D>
+					<source>id-fx_surf-5</source>
+				</sampler2D>
+			</newparam>
+			<technique sid="common">
+				<blinn>
+					<emission>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</emission>
+					<ambient>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</ambient>
+					<diffuse>
+						<texture texture="id-fx_sampler-6" texcoord="CHANNEL1"/>
+					</diffuse>
+					<specular>
+						<color>  0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0 </color>
+					</specular>
+					<shininess>
+						<float>50</float>
+					</shininess>
+					<reflective>
+						<color>  1.0 1.0 1.0 1.0 </color>
+					</reflective>
+					<index_of_refraction>
+						<float>4.0</float>
+					</index_of_refraction>
+				</blinn>
+				<extra>
+					<technique profile="FCOLLADA">
+					</technique>
+					<technique profile="GOOGLEEARTH">
+						<double_sided>0</double_sided>
+					</technique>
+				</extra>
+			</technique>
+		</profile_COMMON>
+	</effect>
+</library_effects>
+<library_materials>
+	<material id="id-material-7" name="Doormaterial">
+		<instance_effect url="#id-fx-3"/>
+	</material>
+</library_materials>
+<library_geometries>
+	<geometry id="id-mesh-8" name="Cube.003">
+		<mesh>
+			<source id="id-mesh-8-positions">
+				<float_array id="id-mesh-8-positions-array" count="12"> 0.28883808851242065 -2.5331974029541016e-07 1.0447990894317627 0.28883805871009827 1.043081283569336e-07 -1.0447993278503418 -0.2888379395008087 2.2351741790771484e-07 -1.0447993278503418 -0.28883811831474304 -7.450580596923828e-08 1.0447990894317627</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-8-positions-array" count="4" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-8-normals">
+				<float_array id="id-mesh-8-normals-array" count="12"> 2.5795009150897386e-07 1.0 1.5688446808326262e-07 2.5795009150897386e-07 1.0 1.5688446808326262e-07 2.5795009150897386e-07 1.0 1.5688446808326262e-07 2.5795009150897386e-07 1.0 1.5688446808326262e-07</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-8-normals-array" count="4" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-8-texcoord-0">
+				<float_array id="id-mesh-8-texcoord-0-array" count="8"> 0.14253482222557068 0.9999474287033081 0.1425354778766632 5.257129669189453e-05 0.8780887126922607 5.257129669189453e-05 0.8780889511108398 0.9999474287033081</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-8-texcoord-0-array" count="4" stride="2">
+					<param name="S" type="float"/>
+					<param name="T" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<vertices id="id-mesh-8-vertices">
+				<input semantic="POSITION" source="#id-mesh-8-positions"/>
+			</vertices>
+			<polygons count="1" material="id-trimat-9">
+				<input semantic="VERTEX" source="#id-mesh-8-vertices" offset="0"/>
+				<input semantic="NORMAL" source="#id-mesh-8-normals" offset="0"/>
+				<input semantic="TEXCOORD" source="#id-mesh-8-texcoord-0" offset="0" set="0"/>
+				<p> 0 1 2 3 </p>
+			</polygons>
+		</mesh>
+	</geometry>
+</library_geometries>
+<library_cameras>
+	<camera id="id-camera-2" name="Camera">
+		<optics>
+			<technique_common>
+				<perspective>
+					<yfov>49.13434207760448</yfov>
+					<aspect_ratio>1.7777777777777777</aspect_ratio>
+					<znear>0.10000000149011612</znear>
+					<zfar>100.0</zfar>
+				</perspective>
+			</technique_common>
+		</optics>
+	</camera>
+</library_cameras>
+<library_lights>
+	<light id="id-light-10" name="Lamp">
+			<technique_common>
+				<point>
+					<color>  1.0 1.0 1.0 </color>
+					<linear_attenuation>0.06666670481366115</linear_attenuation>
+				</point>
+			</technique_common>
+	</light>
+</library_lights>
+<library_visual_scenes>
+	<visual_scene id="id-scene-1" name="scene">
+		<node id="Camera" name="Camera" type="NODE">
+			<matrix sid="transform"> 0.6859206557273865 -0.32401347160339355 0.6515582203865051 7.481131553649902 0.7276763319969177 0.305420845746994 -0.6141703724861145 -6.5076398849487305 0.0 0.8953956365585327 0.44527140259742737 5.34366512298584 0.0 0.0 0.0 1.0  </matrix>
+			<instance_camera url="#id-camera-2"/>
+		</node>
+		<node id="Cube" name="Cube" type="NODE">
+			<matrix sid="transform"> 2.865774154663086 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0  </matrix>
+			<instance_geometry url="#id-mesh-8">
+				<bind_material>
+					<technique_common>
+						<instance_material symbol="id-trimat-9" target="#id-material-7"/>
+					</technique_common>
+				</bind_material>
+			</instance_geometry>
+		</node>
+		<node id="Lamp" name="Lamp" type="NODE">
+			<matrix sid="transform"> -0.29086464643478394 -0.7711008191108704 0.5663931965827942 1.0475132465362549 0.9551711678504944 -0.1998833566904068 0.21839119493961334 2.0858936309814453 -0.05518905818462372 0.6045247316360474 0.7946722507476807 3.8757948875427246 0.0 0.0 0.0 1.0  </matrix>
+			<instance_light url="#id-light-10"/>
+		</node>
+	</visual_scene>
+</library_visual_scenes>
+<scene>
+	<instance_visual_scene url="#id-scene-1" />
+</scene>
+</COLLADA>
