@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/WORLDINTERACTOR_baseclass.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Models/schrank.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Models/images/Locker_tex.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 1, -4.96612, 1.50987, 1, -4.96612, -1.50987, -1, -4.96612, 1.50987, -1, -4.96612, -1.50987, -1, 4.96612, -1.50987, 1, 4.96612, -1.50987, -1, 4.96612, 1.50987, 0.999999, 4.96612, 1.50987, 1, 4.96612, -1.50987, 1, -4.96612, -1.50987, 0.999999, 4.96612, 1.50987, 1, -4.96612, 1.50987, 0.999999, 4.96612, 1.50987, 1, -4.96612, 1.50987, -1, 4.96612, 1.50987, -1, -4.96612, 1.50987, -1, 4.96612, 1.50987, -1, -4.96612, 1.50987, -1, 4.96612, -1.50987, -1, -4.96612, -1.50987, 1, -4.96612, -1.50987, 1, 4.96612, -1.50987, -1, -4.96612, -1.50987, -1, 4.96612, -1.50987 )
+
+[node name="BlueLocker" type="StaticBody"]
+script = ExtResource( 1 )
+interactor_type = 2
+
+[node name="schrank" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )

@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/schrank.obj-640fc93ff5348c204d4826e58659daef.mesh"
+
+[deps]
+
+files=[ "res://.import/schrank.obj-640fc93ff5348c204d4826e58659daef.mesh" ]
+
+source_file="res://Assets/Models/schrank.obj"
+dest_files=[ "res://.import/schrank.obj-640fc93ff5348c204d4826e58659daef.mesh", "res://.import/schrank.obj-640fc93ff5348c204d4826e58659daef.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

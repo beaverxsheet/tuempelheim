@@ -98,7 +98,7 @@ func _physics_process(delta):
 				globals.change_item_amount(1,res.collider.ID)
 				res.collider.pickup()
 			if res.has("position") and ("is_world_interactor" in res.collider):
-				res.collider.change_scene_onclick()
+				res.collider.interact_onclick()
 			find = false
 			
 		# Similar code but run continuously, connects to HUD overlay
