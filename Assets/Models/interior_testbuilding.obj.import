@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/interior_testbuilding.obj-2f698ff9d1bdb603760094019ff08d21.mesh"
+
+[deps]
+
+files=[ "res://.import/interior_testbuilding.obj-2f698ff9d1bdb603760094019ff08d21.mesh" ]
+
+source_file="res://Assets/Models/interior_testbuilding.obj"
+dest_files=[ "res://.import/interior_testbuilding.obj-2f698ff9d1bdb603760094019ff08d21.mesh", "res://.import/interior_testbuilding.obj-2f698ff9d1bdb603760094019ff08d21.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
