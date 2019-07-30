@@ -103,7 +103,11 @@ func _physics_process(delta):
 				res.collider.interact_onclick()
 				# Case: it is a chest
 				if res.collider.interactor_type == 2:
+					capture_mouse_mode(false)
+					get_node("../Control").show_chest_inventory = true
 					print("this is a chest, duh")
+					yield(get_node("../Control/ChestInventory/VBoxContainer/Button"), "pressed") # Resume operations once close button pressed
+					capture_mouse_mode(true)
 			find = false
 			
 		# Similar code but run continuously, connects to HUD overlay
