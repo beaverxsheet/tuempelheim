@@ -1,4 +1,4 @@
 extends WorldInteractor
 
 func _ready():
-	points_to = "res://Scenes/World.tscn"
+	points_to = "res://Scenes/Interior.tscn"
