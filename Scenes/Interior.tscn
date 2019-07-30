@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/HUD_Overlay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ingame_Control.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Models/images/Interior_testbuilding_tex.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/Door.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Models/Doormaterial.material" type="Material" id=7]
+[ext_resource path="res://Scenes/BlueLocker.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 5 )
@@ -68,6 +69,9 @@ shape = SubResource( 2 )
 [node name="Door" type="StaticBody" parent="."]
 transform = Transform( -4.37114e-08, 0, -1, 0, 2.71344, 0, 1.93006, 0, -8.43655e-08, -3.35556, 5.28784, 3.00722 )
 script = ExtResource( 6 )
+chest_inventory = {
+0: 2
+}
 
 [node name="Cube" type="MeshInstance" parent="Door"]
 transform = Transform( 2.86577, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -76,3 +80,6 @@ material/0 = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Door"]
 shape = SubResource( 4 )
+
+[node name="BlueLocker" parent="." instance=ExtResource( 8 )]
+transform = Transform( -0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 2.9046, 6.10552, 0 )
