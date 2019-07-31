@@ -104,8 +104,9 @@ func _physics_process(delta):
 				# Case: it is a chest
 				if res.collider.interactor_type == 2:
 					capture_mouse_mode(false)
+					get_node("../Control").loop_to_create_itemlist(get_node("../Control/Chest/ChestInventory/VBoxContainer/ScrollContainer/ScrollableItems"), res.collider.chest_inventory)
 					get_node("../Control").show_chest_inventory = true
-					print("this is a chest, duh")
+					print(res.collider.chest_inventory)
 					yield(get_node("../Control/Chest/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
 					capture_mouse_mode(true)
 			find = false

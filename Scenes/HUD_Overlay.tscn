@@ -121,6 +121,20 @@ margin_bottom = 51.0
 custom_fonts/font = ExtResource( 7 )
 text = "Truhe"
 
+[node name="ScrollContainer" type="ScrollContainer" parent="Chest/ChestInventory/VBoxContainer"]
+margin_top = 55.0
+margin_right = 336.0
+margin_bottom = 986.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ScrollableItems" type="VBoxContainer" parent="Chest/ChestInventory/VBoxContainer/ScrollContainer"]
+margin_right = 336.0
+margin_bottom = 931.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="YourInventory" type="PanelContainer" parent="Chest"]
 anchor_left = 1.0
 anchor_right = 1.0

@@ -83,3 +83,7 @@ shape = SubResource( 4 )
 
 [node name="BlueLocker" parent="." instance=ExtResource( 8 )]
 transform = Transform( -0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 2.9046, 6.10552, 0 )
+chest_inventory = {
+"Test": "mmh",
+"Test again": "yes"
+}
