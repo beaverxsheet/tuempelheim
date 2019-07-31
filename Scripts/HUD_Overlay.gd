@@ -6,16 +6,16 @@ var show_chest_inventory = false
 
 
 func _ready():
-	$Control/PanelContainer.hide()
+	$MainHUD/PanelContainer.hide()
 	$ChestInventory.hide()
 	
 
 func _process(delta):
 	# Hide or show depending on visibility of inventory
 	if inventory_shown:
-		$Control.hide()
+		$MainHUD.hide()
 	else:
-		$Control.show()
+		$MainHUD.show()
 	
 	if show_chest_inventory:
 		$ChestInventory.show()
@@ -24,10 +24,10 @@ func _process(delta):
 		
 	# Hide or show the item infobox
 	if item_in_crosshairs:
-		$Control/PanelContainer.update_panel_info(item_in_crosshairs)
-		$Control/PanelContainer.show()
+		$MainHUD/PanelContainer.update_panel_info(item_in_crosshairs)
+		$MainHUD/PanelContainer.show()
 	else:
-		$Control/PanelContainer.hide()
+		$MainHUD/PanelContainer.hide()
 
 
 func _on_close_ChestInventory_pressed():

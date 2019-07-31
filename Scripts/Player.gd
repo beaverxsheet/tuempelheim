@@ -50,21 +50,21 @@ func _input(event):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("Menu/InventoryGUI").visible: # Uncapture mouse
+	if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("Control/Control").visible: # Uncapture mouse
 		capture_mouse_mode(false)
-	elif Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("Menu/InventoryGUI").visible: # Capture mouse
+	elif Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("Control/Control").visible: # Capture mouse
 		capture_mouse_mode(true)
-	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("Menu/InventoryGUI").visible: # Show inventory
-		get_parent().get_node("Menu/InventoryGUI").show()
+	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("Control/Control").visible: # Show inventory
+		get_parent().get_node("Control/Control").show()
 		get_node("../Control").inventory_shown = true
 		capture_mouse_mode(false)
-	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("Menu/InventoryGUI").visible: # Hide inventory
-		get_parent().get_node("Menu/InventoryGUI").hide()
+	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("Control/Control").visible: # Hide inventory
+		get_parent().get_node("Control/Control").hide()
 		get_node("../Control").inventory_shown = false
 		capture_mouse_mode(true)
 	if Input.is_action_pressed("end"): # Quit
 		get_tree().quit()
-	if Input.is_action_just_pressed("ui_up") and not get_parent().get_node("Menu/InventoryGUI").visible: # Switch scene tester
+	if Input.is_action_just_pressed("ui_up") and not get_parent().get_node("Control/Control").visible: # Switch scene tester
 		scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
 	fps.text = str(Engine.get_frames_per_second())
 
