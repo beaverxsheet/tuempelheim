@@ -7,7 +7,7 @@ var show_chest_inventory = false
 
 func _ready():
 	$MainHUD/PanelContainer.hide()
-	$ChestInventory.hide()
+	$Chest.hide()
 	
 
 func _process(delta):
@@ -18,9 +18,9 @@ func _process(delta):
 		$MainHUD.show()
 	
 	if show_chest_inventory:
-		$ChestInventory.show()
+		$Chest.show()
 	else:
-		$ChestInventory.hide()
+		$Chest.hide()
 		
 	# Hide or show the item infobox
 	if item_in_crosshairs:

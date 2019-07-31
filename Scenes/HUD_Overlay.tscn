@@ -5,8 +5,8 @@
 [ext_resource path="res://Scripts/HUD_Item_Infobox.gd" type="Script" id=3]
 [ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=6]
-[ext_resource path="res://Scenes/Ingame_Control.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Ingame_Control.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=7]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -98,30 +98,63 @@ custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
 
-[node name="ChestInventory" type="PanelContainer" parent="."]
+[node name="Control" parent="." instance=ExtResource( 6 )]
 visible = false
+
+[node name="Chest" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ChestInventory" type="PanelContainer" parent="Chest"]
 anchor_bottom = 1.0
 margin_right = 350.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ChestInventory"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Chest/ChestInventory"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 343.0
 margin_bottom = 993.0
 
-[node name="Label" type="Label" parent="ChestInventory/VBoxContainer"]
+[node name="Label" type="Label" parent="Chest/ChestInventory/VBoxContainer"]
 margin_right = 336.0
 margin_bottom = 51.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 text = "Truhe"
 
-[node name="Button" type="Button" parent="ChestInventory/VBoxContainer"]
-margin_top = 55.0
+[node name="YourInventory" type="PanelContainer" parent="Chest"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Chest/YourInventory"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 343.0
+margin_bottom = 993.0
+
+[node name="Label" type="Label" parent="Chest/YourInventory/VBoxContainer"]
 margin_right = 336.0
-margin_bottom = 75.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Inventar"
+align = 2
+
+[node name="CenterBackPanel" type="PanelContainer" parent="Chest"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = 250.0
+margin_right = 100.0
+margin_bottom = 344.0
+
+[node name="Button" type="Button" parent="Chest/CenterBackPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 87.0
 custom_fonts/font = ExtResource( 4 )
 text = "Zurück"
-
-[node name="Control" parent="." instance=ExtResource( 7 )]
-visible = false
-[connection signal="pressed" from="ChestInventory/VBoxContainer/Button" to="." method="_on_close_ChestInventory_pressed"]
+[connection signal="pressed" from="Chest/CenterBackPanel/Button" to="." method="_on_close_ChestInventory_pressed"]

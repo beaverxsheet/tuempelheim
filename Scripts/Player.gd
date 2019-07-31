@@ -106,7 +106,7 @@ func _physics_process(delta):
 					capture_mouse_mode(false)
 					get_node("../Control").show_chest_inventory = true
 					print("this is a chest, duh")
-					yield(get_node("../Control/ChestInventory/VBoxContainer/Button"), "pressed") # Resume operations once close button pressed
+					yield(get_node("../Control/Chest/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
 					capture_mouse_mode(true)
 			find = false
 			
