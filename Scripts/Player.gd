@@ -26,6 +26,13 @@ var find = false
 onready var globals = get_node("/root/globals")
 onready var scene_changer = get_node("/root/Change_Scene")
 
+enum {
+	FREE_MOUSE,
+	CAPTURE_MOUSE,
+	OPEN_MENU,
+	CLOSE_MENU
+}
+
 
 func _ready():
 	# Connect to viewport_size_change
@@ -50,15 +57,15 @@ func _input(event):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("Control/Control").visible: # Uncapture mouse
+	if mouse_n_cam_bool_helper(FREE_MOUSE): # Uncapture mouse
 		capture_mouse_mode(false)
-	elif Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("Control/Control").visible: # Capture mouse
+	elif mouse_n_cam_bool_helper(CAPTURE_MOUSE): # Capture mouse
 		capture_mouse_mode(true)
-	elif Input.is_action_just_pressed("inventory") and not get_parent().get_node("Control/Control").visible: # Show inventory
+	elif mouse_n_cam_bool_helper(OPEN_MENU): # Show inventory
 		get_parent().get_node("Control/Control").show()
 		get_node("../Control").inventory_shown = true
 		capture_mouse_mode(false)
-	elif Input.is_action_just_pressed("inventory") and get_parent().get_node("Control/Control").visible: # Hide inventory
+	elif mouse_n_cam_bool_helper(CLOSE_MENU): # Hide inventory
 		get_parent().get_node("Control/Control").hide()
 		get_node("../Control").inventory_shown = false
 		capture_mouse_mode(true)
@@ -120,8 +127,7 @@ func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
 	camera_width_center = OS.get_window_size().x / 2
 	camera_height_center = OS.get_window_size().y / 2
-	
-	
+
 func capture_mouse_mode(set=true, toggle=false):
 	# Change mouse mode
 	if toggle:
@@ -141,3 +147,20 @@ func capture_mouse_mode(set=true, toggle=false):
 			cam_on = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	return cam_on
+
+func mouse_n_cam_bool_helper(case):
+	# Helper to clean up _process
+	match case:
+		FREE_MOUSE:
+			if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("Control/Control").visible and not get_node("../Control").show_chest_inventory:
+				return true
+		CAPTURE_MOUSE:
+			if Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("Control/Control").visible and not get_node("../Control").show_chest_inventory:
+				return true
+		OPEN_MENU:
+			if Input.is_action_just_pressed("inventory") and not get_parent().get_node("Control/Control").visible and not get_node("../Control").show_chest_inventory:
+				return true
+		CLOSE_MENU:
+			if Input.is_action_just_pressed("inventory") and get_parent().get_node("Control/Control").visible:
+				return true
+	return false
