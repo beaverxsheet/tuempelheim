@@ -18,6 +18,7 @@ func add_item(item_ID, item_name, weight, value, item_type=0, is_unique=false):
 func change_item_amount(change, item_id, overrideNegative=false):
 	var item = globals.itemArray[item_id]
 	if globals.inventoryContents.get(item, false):
+		# Execute this if the item is already in inventory
 		var newValue = globals.inventoryContents[item] + change
 		if newValue < 0 and !overrideNegative:
 			return "Cannot go below zero"
@@ -27,6 +28,7 @@ func change_item_amount(change, item_id, overrideNegative=false):
 		else:
 			globals.inventoryContents[item] = newValue
 	else:
+		# Create new entry if not in inventory
 		var newValue = 0 + change
 		if newValue < 0 and !overrideNegative:
 			return "Cannot go below zero"
