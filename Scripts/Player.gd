@@ -112,7 +112,7 @@ func _physics_process(delta):
 				if res.collider.interactor_type == 2:
 					capture_mouse_mode(false)
 					get_node("../Control").fill_chest_and_personal_itemlists(res.collider.chest_inventory)
-					print(res.collider.chest_inventory)
+#					print(res.collider.chest_inventory)
 					yield(get_node("../Control/Chest/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
 					capture_mouse_mode(true)
 			find = false
