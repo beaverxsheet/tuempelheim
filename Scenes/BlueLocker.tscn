@@ -14,8 +14,7 @@ points = PoolVector3Array( 1, -4.96612, 1.50987, 1, -4.96612, -1.50987, -1, -4.9
 script = ExtResource( 1 )
 interactor_type = 2
 chest_inventory = {
-"Another Thing": 4,
-"Thing": 2
+0: 3
 }
 
 [node name="schrank" type="MeshInstance" parent="."]

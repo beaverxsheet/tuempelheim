@@ -4,10 +4,6 @@ var item_in_crosshairs = null
 var inventory_shown = false
 var show_chest_inventory = false
 
-var chest_inventory_to_show = {}
-var inventory_buttons_chest = []
-var inventory_buttons_playa = []
-
 
 func _ready():
 	$MainHUD/PanelContainer.hide()
@@ -87,19 +83,22 @@ func loop_to_create_itemlist(object, dict, align_right=false, is_player=false):
 	var new
 	for i in dict:
 		print(i)
-		new = create_itemlist_control_node(i, dict.get(i), align_right, is_player)
+		new = create_itemlist_control_node(dict[i][0], dict[i][1], align_right, is_player)
 		object.add_child(new)
 
 func fill_chest_and_personal_itemlists(dict):
-	# Fill Chest inventory with res.collider.chest_inventory
-	loop_to_create_itemlist($Chest/ChestInventory/VBoxContainer/ScrollContainer/ScrollableItems, dict)
-	chest_inventory_to_show = dict
+	# Use chest inventory and display
+	var c_inventory = {}
+	for i in dict:
+		c_inventory[i] = [globals.itemArray[i].item_name, dict[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
+	loop_to_create_itemlist($Chest/ChestInventory/VBoxContainer/ScrollContainer/ScrollableItems, c_inventory)
+	
 	# Fill Player inventory with player inventory
-	var p_inventory = {}
-	# Small hack: creates playerinventory dict similar to the one stored globally
+	# Same as above, but using playerinventory dict stored globally
 	# But the keys are item_name and not the objects themselves
-	for i in globals.inventoryContents.keys():
-		p_inventory[i.item_name] = globals.inventoryContents.get(i)
+	var p_inventory = {}
+	for i in globals.inventoryContents:
+		p_inventory[i] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
 	loop_to_create_itemlist($Chest/YourInventory/VBoxContainer/ScrollContainer/ScrollableItems, p_inventory, true, true) # TODO: Replace dict with actual player inventory
 	show_chest_inventory = true
 	
