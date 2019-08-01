@@ -21,8 +21,15 @@ func _ready():
 func _process(delta):
 	$BackgroundPanel/VBoxContainer/HBoxContainer/Amount.text = String(globals.check_item_amount(0))
 	$BackgroundPanel/VBoxContainer/HBoxContainer2/Amount.text = String(globals.check_item_amount(1))
-	if Input.is_action_just_pressed("ui_down"):
-		pass
+	
+	if !globals.check_item_amount(0):
+		$BackgroundPanel/VBoxContainer/HBoxContainer/Remove_from.disabled = true
+	else:
+		$BackgroundPanel/VBoxContainer/HBoxContainer/Remove_from.disabled = false
+	if !globals.check_item_amount(1):
+		$BackgroundPanel/VBoxContainer/HBoxContainer2/Remove_from.disabled = true
+	else:
+		$BackgroundPanel/VBoxContainer/HBoxContainer2/Remove_from.disabled = false
 
 func _pencil_add_to_pressed():
 	# Add a pencil
