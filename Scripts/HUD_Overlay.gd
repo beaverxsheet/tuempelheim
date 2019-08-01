@@ -3,6 +3,7 @@ extends CanvasLayer
 var item_in_crosshairs = null
 var inventory_shown = false
 var show_chest_inventory = false
+var chest_in_focus = null
 
 
 func _ready():
@@ -34,7 +35,7 @@ func _process(delta):
 func _on_close_ChestInventory_pressed():
 	show_chest_inventory = false
 
-func create_itemlist_control_node(name, amount, align_right, is_player):
+func create_itemlist_control_node(name, amount, align_right, is_player, ID):
 	# Create a single item slot in the inventory list (eg in the chest stuff)
 	var newContainer
 	var newLabel
@@ -58,7 +59,7 @@ func create_itemlist_control_node(name, amount, align_right, is_player):
 	newButton.text = "Transfer"
 	
 	# Add signal, connect to self upon being pressed
-	newButton.connect("pressed", self, "_on_button_transfer_press", [is_player, String(name)])
+	newButton.connect("pressed", self, "_on_button_transfer_press", [is_player, ID, String(name)])
 	
 	if align_right:
 		# Reorder things to mirror and align to the right
@@ -82,15 +83,15 @@ func loop_to_create_itemlist(object, dict, align_right=false, is_player=false):
 	# Populate with new children
 	var new
 	for i in dict:
-		print(i)
-		new = create_itemlist_control_node(dict[i][0], dict[i][1], align_right, is_player)
+		new = create_itemlist_control_node(dict[i][0], dict[i][1], align_right, is_player, i)
 		object.add_child(new)
 
-func fill_chest_and_personal_itemlists(dict):
+func fill_chest_and_personal_itemlists(the_actual_object):
+	chest_in_focus = the_actual_object
 	# Use chest inventory and display
 	var c_inventory = {}
-	for i in dict:
-		c_inventory[i] = [globals.itemArray[i].item_name, dict[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
+	for i in chest_in_focus.chest_inventory:
+		c_inventory[i] = [globals.itemArray[i].item_name, chest_in_focus.chest_inventory[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
 	loop_to_create_itemlist($Chest/ChestInventory/VBoxContainer/ScrollContainer/ScrollableItems, c_inventory)
 	
 	# Fill Player inventory with player inventory
@@ -98,13 +99,17 @@ func fill_chest_and_personal_itemlists(dict):
 	# But the keys are item_name and not the objects themselves
 	var p_inventory = {}
 	for i in globals.inventoryContents:
-		p_inventory[i] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
+		p_inventory[i.item_ID] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
 	loop_to_create_itemlist($Chest/YourInventory/VBoxContainer/ScrollContainer/ScrollableItems, p_inventory, true, true) # TODO: Replace dict with actual player inventory
 	show_chest_inventory = true
 	
-func _on_button_transfer_press(is_player, name):
+func _on_button_transfer_press(is_player, ID, name):
 	if is_player:
-		print("owned by player")
+		globals.change_item_amount(-1, ID)
+		chest_in_focus.change_item_amount(1, ID)
 	else:
-		print("not owned by you")
-	print(name)
+		globals.change_item_amount(1, ID)
+		chest_in_focus.change_item_amount(-1, ID)
+	# Redraw/Recalculate
+	fill_chest_and_personal_itemlists(chest_in_focus)
+	
