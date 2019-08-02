@@ -1,19 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/HUD_Overlay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Crosshair.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/HUD_Item_Infobox.gd" type="Script" id=3]
 [ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Scenes/Ingame_Control.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=7]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="Control" type="Control" parent="."]
+[node name="MainHUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="MainHUD"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -26,7 +28,8 @@ rect_scale = Vector2( 0.1, 0.1 )
 rect_pivot_offset = Vector2( 261.188, 251.748 )
 texture = ExtResource( 2 )
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="MainHUD"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -36,38 +39,38 @@ margin_top = -94.0
 margin_right = 100.0
 script = ExtResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHUD/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 193.0
 margin_bottom = 87.0
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MainHUD/PanelContainer/VBoxContainer"]
 margin_right = 186.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 4 )
 text = "ITEM"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainHUD/PanelContainer/VBoxContainer"]
 margin_top = 28.0
 margin_right = 186.0
 margin_bottom = 80.0
 alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer"]
 margin_left = 1.0
 margin_right = 88.0
 margin_bottom = 52.0
 
-[node name="Weight" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Weight" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 87.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 4 )
 text = "Gewicht"
 align = 1
 
-[node name="Statement" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Statement" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 28.0
 margin_right = 87.0
 margin_bottom = 52.0
@@ -75,22 +78,111 @@ custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer"]
 margin_left = 92.0
 margin_right = 184.0
 margin_bottom = 52.0
 
-[node name="Value" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="Value" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 margin_right = 92.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 4 )
 text = "Wert        "
 align = 1
 
-[node name="Statement2" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="Statement2" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 margin_top = 28.0
 margin_right = 92.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
+
+[node name="Control" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="Chest" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ChestInventory" type="PanelContainer" parent="Chest"]
+anchor_bottom = 1.0
+margin_right = 350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Chest/ChestInventory"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 343.0
+margin_bottom = 993.0
+
+[node name="Label" type="Label" parent="Chest/ChestInventory/VBoxContainer"]
+margin_right = 336.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Truhe"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Chest/ChestInventory/VBoxContainer"]
+margin_top = 55.0
+margin_right = 336.0
+margin_bottom = 986.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ScrollableItems" type="VBoxContainer" parent="Chest/ChestInventory/VBoxContainer/ScrollContainer"]
+margin_right = 336.0
+margin_bottom = 931.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="YourInventory" type="PanelContainer" parent="Chest"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Chest/YourInventory"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 343.0
+margin_bottom = 993.0
+
+[node name="Label" type="Label" parent="Chest/YourInventory/VBoxContainer"]
+margin_right = 336.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Inventar"
+align = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Chest/YourInventory/VBoxContainer"]
+margin_top = 55.0
+margin_right = 336.0
+margin_bottom = 986.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ScrollableItems" type="VBoxContainer" parent="Chest/YourInventory/VBoxContainer/ScrollContainer"]
+margin_right = 336.0
+margin_bottom = 931.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterBackPanel" type="PanelContainer" parent="Chest"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = 250.0
+margin_right = 100.0
+margin_bottom = 344.0
+
+[node name="Button" type="Button" parent="Chest/CenterBackPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 87.0
+custom_fonts/font = ExtResource( 4 )
+text = "Zurück"
+[connection signal="pressed" from="Chest/CenterBackPanel/Button" to="." method="_on_close_ChestInventory_pressed"]
