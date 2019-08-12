@@ -5,13 +5,14 @@ class_name WorldInteractor
 enum {
 	DOOR,
 	BUTTON,
-	CHEST
+	CHEST,
+	SHOP
 }
 
 onready var globals = get_node("/root/globals")
 onready var scene_changer = get_node("/root/Change_Scene")
 
-export(int, "door", "button", "chest") var interactor_type = DOOR
+export(int, "door", "button", "chest", "shop") var interactor_type = DOOR
 
 export(String) var points_to = "res://Scenes/World.tscn"
 export(Dictionary) var chest_inventory = {}
@@ -26,6 +27,8 @@ func interact_onclick():
 		BUTTON:
 			pass
 		CHEST:
+			pass
+		SHOP:
 			pass
 			
 func change_item_amount(change, item_id):
