@@ -9,15 +9,24 @@ enum {
 	SHOP
 }
 
+
+# General variables
+var is_world_interactor = true
 onready var globals = get_node("/root/globals")
 onready var scene_changer = get_node("/root/Change_Scene")
-
 export(int, "door", "button", "chest", "shop") var interactor_type = DOOR
 
+# Door variables
 export(String) var points_to = "res://Scenes/World.tscn"
+
+# Chest variables
 export(Dictionary) var chest_inventory = {}
 
-var is_world_interactor = true
+# Shop variables
+export(int) var money = 0
+export(bool) var can_shop_buy = false
+
+
 
 func interact_onclick():
 	match interactor_type:
@@ -27,7 +36,10 @@ func interact_onclick():
 		BUTTON:
 			pass
 		CHEST:
-			pass
+			get_node("../Player").capture_mouse_mode(false)
+			get_node("../Control").fill_chest_and_personal_itemlists(self)
+			yield(get_node("../Control/Chest/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
+			get_node("../Player").capture_mouse_mode(true)
 		SHOP:
 			pass
 			

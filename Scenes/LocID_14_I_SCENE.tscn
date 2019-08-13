@@ -28,5 +28,5 @@ script = ExtResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929883, 0, -0.474724 )
 shape = SubResource( 1 )
 
-[node name="Theke1" parent="." instance=ExtResource( 5 )]
+[node name="Theke" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.671093, 0, 0, 0, 1, 0, 0, 0, 2.31914, -0.2256, -1.94054, -2.80634 )

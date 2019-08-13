@@ -5,6 +5,13 @@ const MOUSE_SENS = 0.3
 const GRAV = 5
 const RAY_LEN = 1000
 
+# Worldinteractor
+enum {
+	DOOR,
+	BUTTON,
+	CHEST,
+	SHOP
+}
 
 var cam_on = true
 
@@ -108,13 +115,6 @@ func _physics_process(delta):
 			# Interact with WorldInteractors
 			if res.has("position") and ("is_world_interactor" in res.collider):
 				res.collider.interact_onclick()
-				# Case: it is a chest
-				if res.collider.interactor_type == 2:
-					capture_mouse_mode(false)
-					get_node("../Control").fill_chest_and_personal_itemlists(res.collider)
-#					print(res.collider.chest_inventory)
-					yield(get_node("../Control/Chest/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
-					capture_mouse_mode(true)
 			find = false
 			
 		# Similar code but run continuously, connects to HUD overlay
