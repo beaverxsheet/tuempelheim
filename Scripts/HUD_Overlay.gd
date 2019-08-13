@@ -69,6 +69,9 @@ func create_itemlist_control_node(name, amount, align_right, is_player, ID, is_s
 	newButton.text = "Transfer"
 	if is_shop:
 		newButton.text = "Kaufen"
+		if !globals.can_buy(ID):
+			newButton.disabled = true
+			newButton.hint_tooltip = "Du hast nicht genügend Geld"
 		if is_player:
 			newButton.text = "Verkaufen"
 			if !can_buy:
@@ -152,10 +155,11 @@ func _on_button_transfer_press(is_player, ID, name):
 	else:
 		globals.change_item_amount(1, ID)
 		if chest_in_focus:
-			chest_in_focus.change_item_amount(1, ID)
+			chest_in_focus.change_item_amount(-1, ID)
 			fill_chest_and_personal_itemlists(chest_in_focus)
 		elif shop_in_focus:
-			shop_in_focus.change_item_amount(1,ID)
+			shop_in_focus.change_item_amount(-1,ID)
+			globals.player_money -= globals.itemArray[ID].value
 			fill_shop_and_personal_itemlists(shop_in_focus)
 
 func _on_close_ShopInventory_pressed():
