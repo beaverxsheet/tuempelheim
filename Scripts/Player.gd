@@ -5,6 +5,7 @@ const MOUSE_SENS = 0.3
 const GRAV = 5
 const RAY_LEN = 1000
 
+
 # Worldinteractor
 enum {
 	DOOR,
@@ -12,6 +13,7 @@ enum {
 	CHEST,
 	SHOP
 }
+export (float) var Interaction_Distance = 20
 
 var cam_on = true
 
@@ -108,13 +110,15 @@ func _physics_process(delta):
 		# Find ID of object that has been acted upon with mouseclick
 		if find:
 			# Pick shit up
-			if res.has("position") and ("type" in res.collider):
-				print(res.collider.ID)
-				globals.change_item_amount(1,res.collider.ID)
-				res.collider.pickup()
-			# Interact with WorldInteractors
-			if res.has("position") and ("is_world_interactor" in res.collider):
-				res.collider.interact_onclick()
+			if res.has("position"):
+				if get_Distance(res.collider) <= Interaction_Distance:
+					if "type" in res.collider:
+						print(res.collider.ID)
+						globals.change_item_amount(1,res.collider.ID)
+						res.collider.pickup()
+					# Interact with WorldInteractors
+					if "is_world_interactor" in res.collider:
+						res.collider.interact_onclick()
 			find = false
 			
 		# Similar code but run continuously, connects to HUD overlay
@@ -164,3 +168,7 @@ func mouse_n_cam_bool_helper(case):
 			if Input.is_action_just_pressed("inventory") and get_parent().get_node("Control/Control").visible:
 				return true
 	return false
+
+func get_Distance(target):
+	# Gives distance from target
+	return (global_transform.origin - target.global_transform.origin).length()

@@ -16,7 +16,6 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16834, 6.21927, -3.29831 )
-visible = false
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform( 16, 0, 0, 0, 1, 0, 0, 0, 16, 0, 0, 0 )

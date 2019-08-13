@@ -3,6 +3,7 @@ extends Control
 onready var addTo_btn = $BackgroundPanel/VBoxContainer/HBoxContainer/Add_to
 onready var lessN_btn = $BackgroundPanel/VBoxContainer/HBoxContainer/Remove_from
 onready var globals = get_node("/root/globals")
+onready var itm = preload("res://Scenes/Items.tscn")
 
 var pencil_amount
 
@@ -33,6 +34,16 @@ func _process(delta):
 	else:
 		$BackgroundPanel/VBoxContainer/HBoxContainer2/Remove_from.disabled = false
 
+func drop():
+	#drop item
+	var ppos = get_node("../../Player/Position3D")
+	var p_pos = ppos.global_transform.origin
+	print(p_pos)
+	var item = itm.instance()
+	item.translation = p_pos
+	get_tree().get_root().add_child(item)
+
+
 func _pencil_add_to_pressed():
 	# Add a pencil
 	globals.change_item_amount(1, 0)
@@ -40,6 +51,7 @@ func _pencil_add_to_pressed():
 func _pencil_remove_from_pressed():
 	# Remove a pencil
 	globals.change_item_amount(-1, 0)
+	drop()
 
 
 func _cup_add_to_pressed():

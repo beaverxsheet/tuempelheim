@@ -1,4 +1,4 @@
-extends StaticBody
+extends RigidBody
 
 var type = "Cup"
 var ID = 1
