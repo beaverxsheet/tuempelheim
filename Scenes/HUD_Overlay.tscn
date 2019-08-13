@@ -12,6 +12,7 @@
 script = ExtResource( 1 )
 
 [node name="MainHUD" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -30,6 +31,7 @@ texture = ExtResource( 2 )
 
 [node name="PanelContainer" type="PanelContainer" parent="MainHUD"]
 editor/display_folded = true
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -102,6 +104,7 @@ align = 1
 visible = false
 
 [node name="Chest" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -185,4 +188,131 @@ margin_right = 193.0
 margin_bottom = 87.0
 custom_fonts/font = ExtResource( 4 )
 text = "Zurück"
+
+[node name="Shop" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ShopInventory" type="PanelContainer" parent="Shop"]
+anchor_bottom = 1.0
+margin_right = 350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopInventory"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 343.0
+margin_bottom = 993.0
+
+[node name="Label" type="Label" parent="Shop/ShopInventory/VBoxContainer"]
+margin_right = 336.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Laden"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/ShopInventory/VBoxContainer"]
+margin_top = 55.0
+margin_right = 336.0
+margin_bottom = 931.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ScrollableItems" type="VBoxContainer" parent="Shop/ShopInventory/VBoxContainer/ScrollContainer"]
+margin_right = 336.0
+margin_bottom = 876.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MoneyContainer" type="HBoxContainer" parent="Shop/ShopInventory/VBoxContainer"]
+margin_top = 935.0
+margin_right = 336.0
+margin_bottom = 986.0
+alignment = 2
+
+[node name="Money" type="Label" parent="Shop/ShopInventory/VBoxContainer/MoneyContainer"]
+margin_left = 132.0
+margin_right = 272.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Geld:  "
+
+[node name="MoneyValue" type="Label" parent="Shop/ShopInventory/VBoxContainer/MoneyContainer"]
+margin_left = 276.0
+margin_right = 336.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "0€"
+align = 2
+
+[node name="YourInventory" type="PanelContainer" parent="Shop"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/YourInventory"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 343.0
+margin_bottom = 993.0
+
+[node name="Label" type="Label" parent="Shop/YourInventory/VBoxContainer"]
+margin_right = 336.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Inventar"
+align = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/YourInventory/VBoxContainer"]
+margin_top = 55.0
+margin_right = 336.0
+margin_bottom = 931.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ScrollableItems" type="VBoxContainer" parent="Shop/YourInventory/VBoxContainer/ScrollContainer"]
+margin_right = 336.0
+margin_bottom = 876.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MoneyContainer" type="HBoxContainer" parent="Shop/YourInventory/VBoxContainer"]
+margin_top = 935.0
+margin_right = 336.0
+margin_bottom = 986.0
+
+[node name="Money" type="Label" parent="Shop/YourInventory/VBoxContainer/MoneyContainer"]
+margin_right = 140.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "Geld:  "
+
+[node name="MoneyValue" type="Label" parent="Shop/YourInventory/VBoxContainer/MoneyContainer"]
+margin_left = 144.0
+margin_right = 204.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 7 )
+text = "0€"
+align = 2
+
+[node name="CenterBackPanel" type="PanelContainer" parent="Shop"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = 250.0
+margin_right = 100.0
+margin_bottom = 344.0
+
+[node name="Button" type="Button" parent="Shop/CenterBackPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 87.0
+custom_fonts/font = ExtResource( 4 )
+text = "Zurück"
 [connection signal="pressed" from="Chest/CenterBackPanel/Button" to="." method="_on_close_ChestInventory_pressed"]
+[connection signal="pressed" from="Shop/CenterBackPanel/Button" to="." method="_on_close_ShopInventory_pressed"]
