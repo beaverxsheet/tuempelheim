@@ -14,6 +14,8 @@ var pencil_amount
 func _ready():
 	globals.add_item(0, "Pencil", 1, 1)
 	globals.add_item(1, "Cup", 1, 1)
+	globals.add_item(2, "Brötchen", 1, 1, 2)
+	globals.player_money = 10
 	
 	$BackgroundPanel/VBoxContainer/HBoxContainer/Amount.text = String(globals.check_item_amount(0))
 	$BackgroundPanel/VBoxContainer/HBoxContainer2/Amount.text = String(globals.check_item_amount(1))

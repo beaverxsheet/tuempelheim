@@ -10,8 +10,6 @@ var show_shop_inventory = false
 var shop_in_focus = null
 
 
-
-
 func _ready():
 	$MainHUD/PanelContainer.hide()
 	$Chest.hide()
@@ -53,7 +51,10 @@ func create_itemlist_control_node(name, amount, align_right, is_player, ID, is_s
 	newContainer = HBoxContainer.new()
 	
 	newLabel = Label.new()
-	newLabel.text = String(name)
+	if is_shop:
+		newLabel.text = String(name) + ": " + String(globals.itemArray[ID].value) + "€"
+	else:
+		newLabel.text = String(name)
 	newLabel.rect_min_size = Vector2(150, 0)
 	newLabel.add_font_override("font", load("res://Misc/Fonts/FONT_STANDARD_24.tres"))
 	
@@ -119,7 +120,7 @@ func fill_chest_and_personal_itemlists(the_actual_object):
 		p_inventory[i.item_ID] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
 	loop_to_create_itemlist($Chest/YourInventory/VBoxContainer/ScrollContainer/ScrollableItems, p_inventory, true, true) # TODO: Replace dict with actual player inventory
 	show_chest_inventory = true
-	
+
 func fill_shop_and_personal_itemlists(the_actual_object, can_buy=false):
 	# FOR SHOPS
 	shop_in_focus = the_actual_object
@@ -136,8 +137,9 @@ func fill_shop_and_personal_itemlists(the_actual_object, can_buy=false):
 	for i in globals.inventoryContents:
 		p_inventory[i.item_ID] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
 	loop_to_create_itemlist($Shop/YourInventory/VBoxContainer/ScrollContainer/ScrollableItems, p_inventory, true, true, true) # TODO: Replace dict with actual player inventory
+	$Shop/YourInventory/VBoxContainer/MoneyContainer/MoneyValue.text = String(globals.player_money) + "€"
 	show_shop_inventory = true
-	
+
 func _on_button_transfer_press(is_player, ID, name):
 	if is_player:
 		globals.change_item_amount(-1, ID)
@@ -155,14 +157,11 @@ func _on_button_transfer_press(is_player, ID, name):
 		elif shop_in_focus:
 			shop_in_focus.change_item_amount(1,ID)
 			fill_shop_and_personal_itemlists(shop_in_focus)
-	
-
-
 
 func _on_close_ShopInventory_pressed():
 	# Close Shop UI
 	show_shop_inventory = false
-	
+
 func _on_close_ChestInventory_pressed():
 	# Close Chest UI
 	show_chest_inventory = false
