@@ -4,6 +4,7 @@ onready var b_class = load("res://Scripts/ITEMS_baseclass.gd")
 
 var itemArray = []
 var inventoryContents = {}
+var player_money = 0
 
 func add_item(item_ID, item_name, weight, value, item_type=0, is_unique=false):
 	var item = b_class.new()
@@ -32,3 +33,19 @@ func change_item_amount(change, item_id):
 func check_item_amount(item_id):
 	var item = globals.itemArray[item_id]
 	return globals.inventoryContents.get(item, 0)
+	
+func change_money_amount(change):
+	player_money = player_money + change
+	
+func can_buy(ID, value=null):
+	# Can item be bought
+	if value == null:
+		if (player_money - itemArray[ID].value) >= 0:
+			return true
+		elif (player_money - itemArray[ID].value) <= 0:
+			return false
+	else:
+		if (player_money - value) >= 0:
+			return true
+		elif (player_money - value) <= 0:
+			return false
