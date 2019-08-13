@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/HUD_Overlay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Models/LocID_14_I.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/WORLDINTERACTOR_baseclass.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Theke.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.300587, 2.74809, 3.49643 )
@@ -26,3 +27,6 @@ script = ExtResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="Door"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929883, 0, -0.474724 )
 shape = SubResource( 1 )
+
+[node name="Theke1" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.671093, 0, 0, 0, 1, 0, 0, 0, 2.31914, -0.2256, -1.94054, -2.80634 )

@@ -9,7 +9,7 @@ data = PoolVector3Array( 5.3768, 2.2068, 9.2107, 5.3768, 2.2068, 6.3388, -5.3768
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 2 )
 
-[node name="StaticBody" type="StaticBody"]
+[node name="LocID_14_I" type="StaticBody"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

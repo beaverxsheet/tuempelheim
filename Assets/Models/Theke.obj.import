@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Theke.obj-56139dd06977def58967aaec0fe345a6.mesh"
+
+[deps]
+
+files=[ "res://.import/Theke.obj-56139dd06977def58967aaec0fe345a6.mesh" ]
+
+source_file="res://Assets/Models/Theke.obj"
+dest_files=[ "res://.import/Theke.obj-56139dd06977def58967aaec0fe345a6.mesh", "res://.import/Theke.obj-56139dd06977def58967aaec0fe345a6.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
