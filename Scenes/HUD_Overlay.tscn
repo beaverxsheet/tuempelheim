@@ -12,7 +12,6 @@
 script = ExtResource( 1 )
 
 [node name="MainHUD" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -29,9 +28,8 @@ rect_scale = Vector2( 0.1, 0.1 )
 rect_pivot_offset = Vector2( 261.188, 251.748 )
 texture = ExtResource( 2 )
 
-[node name="PanelContainer" type="PanelContainer" parent="MainHUD"]
+[node name="ItemDemonstrator" type="PanelContainer" parent="MainHUD"]
 editor/display_folded = true
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -41,38 +39,38 @@ margin_top = -94.0
 margin_right = 100.0
 script = ExtResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainHUD/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHUD/ItemDemonstrator"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 193.0
 margin_bottom = 87.0
 
-[node name="Label" type="Label" parent="MainHUD/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MainHUD/ItemDemonstrator/VBoxContainer"]
 margin_right = 186.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 4 )
 text = "ITEM"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainHUD/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainHUD/ItemDemonstrator/VBoxContainer"]
 margin_top = 28.0
 margin_right = 186.0
 margin_bottom = 80.0
 alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainHUD/ItemDemonstrator/VBoxContainer/HBoxContainer"]
 margin_left = 1.0
 margin_right = 88.0
 margin_bottom = 52.0
 
-[node name="Weight" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Weight" type="Label" parent="MainHUD/ItemDemonstrator/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 87.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 4 )
 text = "Gewicht"
 align = 1
 
-[node name="Statement" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Statement" type="Label" parent="MainHUD/ItemDemonstrator/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 28.0
 margin_right = 87.0
 margin_bottom = 52.0
@@ -80,24 +78,54 @@ custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainHUD/ItemDemonstrator/VBoxContainer/HBoxContainer"]
 margin_left = 92.0
 margin_right = 184.0
 margin_bottom = 52.0
 
-[node name="Value" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="Value" type="Label" parent="MainHUD/ItemDemonstrator/VBoxContainer/HBoxContainer/VBoxContainer3"]
 margin_right = 92.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 4 )
 text = "Wert        "
 align = 1
 
-[node name="Statement2" type="Label" parent="MainHUD/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="Statement2" type="Label" parent="MainHUD/ItemDemonstrator/VBoxContainer/HBoxContainer/VBoxContainer3"]
 margin_top = 28.0
 margin_right = 92.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
+align = 1
+
+[node name="DoorDemonstrator" type="PanelContainer" parent="MainHUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -94.0
+margin_right = 100.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHUD/DoorDemonstrator"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 87.0
+
+[node name="Label" type="Label" parent="MainHUD/DoorDemonstrator/VBoxContainer"]
+margin_right = 186.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 4 )
+text = "TÜR"
+align = 1
+
+[node name="Destination" type="Label" parent="MainHUD/DoorDemonstrator/VBoxContainer"]
+margin_top = 28.0
+margin_right = 186.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 4 )
+text = "Ziel"
 align = 1
 
 [node name="Control" parent="." instance=ExtResource( 6 )]
