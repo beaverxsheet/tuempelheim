@@ -1,10 +1,19 @@
 extends KinematicBody
 
-const MOVE_VEL = 10
-const MOUSE_SENS = 0.3
-const GRAV = 5
-const RAY_LEN = 1000
+# Walk
+var velocity = Vector3()
+var direction = Vector3()
+const MOVE_SPEED = 10
+const RUN_SPEED = 30
+const GRAV = -10
+const ACCEL = 2
+const DEACCEL = 6
 
+#jumping
+export (float) var jump_height = 5
+
+const MOUSE_SENS = 0.3
+const RAY_LEN = 1000
 
 # Worldinteractor
 enum {
@@ -86,20 +95,9 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	var move_vec = Vector3()
-	if Input.is_action_pressed("move_forward"):
-		move_vec.z -= 1
-	if Input.is_action_pressed("move_backward"):
-		move_vec.z += 1
-	if Input.is_action_pressed("move_left"):
-		move_vec.x -= 1
-	if Input.is_action_pressed("move_right"):
-		move_vec.x += 1
-	move_vec = move_vec.normalized()
-	move_vec = move_vec.rotated(Vector3(0,1,0), rotation.y) * MOVE_VEL
-	move_vec -= Vector3(0,GRAV,0)
-	move_and_slide(move_vec)
-	#move_and_collide(move_vec*delta)
+
+	walk(delta)
+
 	if cam_on:
 		var mouse_pos = get_viewport().get_mouse_position()
 		from = $Camera.project_ray_origin(mouse_pos)
@@ -126,6 +124,57 @@ func _physics_process(delta):
 			get_node("../Control").item_in_crosshairs = res.collider.ID
 		else:
 			get_node("../Control").item_in_crosshairs = null
+
+
+func walk(delta):
+# reset the direction of the player
+	direction = Vector3()
+	
+	# get the rotation of the camera
+	var aim = $Camera.get_global_transform().basis
+	# check input and change direction
+	if Input.is_action_pressed("move_forward"):
+		direction -= aim.z
+	if Input.is_action_pressed("move_backward"):
+		direction += aim.z
+	if Input.is_action_pressed("move_left"):
+		direction -= aim.x
+	if Input.is_action_pressed("move_right"):
+		direction += aim.x
+	
+	direction = direction.normalized()
+	
+	velocity.y += GRAV * delta
+	
+	var temp_velocity = velocity
+	temp_velocity.y = 0
+	
+	var speed
+	if Input.is_action_pressed("move_sprint"):
+		speed = RUN_SPEED
+	else:
+		speed = MOVE_SPEED
+	
+	# where would the player go at max speed
+	var target = direction * speed
+	
+	var acceleration
+	if direction.dot(temp_velocity) > 0:
+		acceleration = ACCEL
+	else:
+		acceleration = DEACCEL
+	
+	# calculate a portion of the distance to go
+	temp_velocity = temp_velocity.linear_interpolate(target, acceleration * delta)
+	
+	velocity.x = temp_velocity.x
+	velocity.z = temp_velocity.z
+	
+	# move
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_height
 
 func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
