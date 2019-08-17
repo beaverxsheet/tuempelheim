@@ -25,6 +25,7 @@ shape = SubResource( 2 )
 [node name="WorldInteractor" type="StaticBody" parent="."]
 script = ExtResource( 3 )
 points_to = "res://Scenes/LocID_14_I_SCENE.tscn"
+door_describe_target = "Bäckerei Wind"
 
 [node name="CollisionShape2" type="CollisionShape" parent="WorldInteractor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3456, 4.55033, 0 )

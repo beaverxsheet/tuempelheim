@@ -11,7 +11,7 @@ var shop_in_focus = null
 
 
 func _ready():
-	$MainHUD/PanelContainer.hide()
+	$MainHUD/ItemDemonstrator.hide()
 	$Chest.hide()
 	$Shop.hide()
 	var globals = get_node("/root/globals")
@@ -35,11 +35,18 @@ func _process(delta):
 		$Shop.hide()
 		
 	# Hide or show the item infobox
-	if item_in_crosshairs:
-		$MainHUD/PanelContainer.update_panel_info(item_in_crosshairs)
-		$MainHUD/PanelContainer.show()
-	else:
-		$MainHUD/PanelContainer.hide()
+	match item_in_crosshairs[0]:
+		"item":
+			$MainHUD/ItemDemonstrator.update_panel_info(item_in_crosshairs[1])
+			$MainHUD/ItemDemonstrator.show()
+			$MainHUD/DoorDemonstrator.hide()
+		"door":
+			$MainHUD/DoorDemonstrator/VBoxContainer/Destination.text = item_in_crosshairs[1]
+			$MainHUD/ItemDemonstrator.hide()
+			$MainHUD/DoorDemonstrator.show()
+		_:
+			$MainHUD/ItemDemonstrator.hide()
+			$MainHUD/DoorDemonstrator.hide()
 
 
 func create_itemlist_control_node(name, amount, align_right, is_player, ID, is_shop, can_buy):

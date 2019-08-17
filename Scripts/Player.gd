@@ -51,7 +51,6 @@ enum {
 	CLOSE_MENU
 }
 
-
 func _ready():
 	# Connect to viewport_size_change
 	get_tree().get_root().connect("size_changed", self, "viewport_size_changed")
@@ -118,12 +117,21 @@ func _physics_process(delta):
 					if "is_world_interactor" in res.collider:
 						res.collider.interact_onclick()
 			find = false
-			
-		# Similar code but run continuously, connects to HUD overlay
-		if res.has("position") and ("type" in res.collider):
-			get_node("../Control").item_in_crosshairs = res.collider.ID
+		
+		# Show shit in crosshairs
+		if res.has("position") and res.has("position"):
+			if get_Distance(res.collider) <= Interaction_Distance:
+				if "type" in res.collider:
+					get_node("../Control").item_in_crosshairs = ["item", res.collider.ID]
+				# Interact with WorldInteractors
+				elif "is_world_interactor" in res.collider:
+					match res.collider.interactor_type:
+						DOOR:
+							get_node("../Control").item_in_crosshairs = ["door", res.collider.door_describe_target]
+				else:
+					get_node("../Control").item_in_crosshairs = [null, null]
 		else:
-			get_node("../Control").item_in_crosshairs = null
+			get_node("../Control").item_in_crosshairs = [null, null]
 
 
 func walk(delta):
