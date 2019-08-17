@@ -15,7 +15,6 @@ export (float) var jump_height = 5
 const MOUSE_SENS = 0.3
 const RAY_LEN = 1000
 
-
 # Worldinteractor
 enum {
 	DOOR,
@@ -174,7 +173,7 @@ func walk(delta):
 	# move
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_height
 
 func viewport_size_changed():
