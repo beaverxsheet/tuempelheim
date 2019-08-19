@@ -2,11 +2,19 @@ extends Node
 
 onready var b_class = load("res://Scripts/ITEMS_baseclass.gd")
 
+enum {
+	MISC,
+	WEAPON,
+	CONSUMABLE,
+	QUEST_ITEM,
+	TOOL
+}
+
 var itemArray = []
 var inventoryContents = {}
 var player_money = 0
 
-func add_item(item_ID, item_name, weight, value, item_type=0, is_unique=false):
+func add_item(item_ID, item_name, weight, value, item_type=MISC, is_unique=false):
 	var item = b_class.new()
 	item.item_ID = item_ID
 	item.item_name = item_name
