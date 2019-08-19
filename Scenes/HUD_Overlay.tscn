@@ -9,6 +9,7 @@
 [ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=7]
 
 [node name="HUD" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="MainHUD" type="Control" parent="."]

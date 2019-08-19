@@ -196,17 +196,21 @@ func capture_mouse_mode(set=true, toggle=false):
 		if cam_on:
 			cam_on = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			get_tree().paused = false
 		elif !cam_on:
 			cam_on = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
 	elif !toggle:
 		# Set mouse mode regardless of current state
 		if set:
 			cam_on = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			get_tree().paused = false
 		elif !set:
 			cam_on = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
 	return cam_on
 
 func mouse_n_cam_bool_helper(case):
