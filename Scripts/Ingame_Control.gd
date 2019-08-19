@@ -78,6 +78,7 @@ func fill_personal_itemlist():
 
 func _on_button_transfer_press(ID, name):
 	globals.change_item_amount(-1, ID)
+	fill_personal_itemlist()
 	drop()
 
 func _on_BackgroundPanel_visibility_changed():
