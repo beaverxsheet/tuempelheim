@@ -1,38 +1,18 @@
 extends Control
 
-onready var addTo_btn = $BackgroundPanel/VBoxContainer/HBoxContainer/Add_to
-onready var lessN_btn = $BackgroundPanel/VBoxContainer/HBoxContainer/Remove_from
 onready var globals = get_node("/root/globals")
 onready var itm = preload("res://Scenes/Items.tscn")
 
-var pencil_amount
-
-# Array containing all objects
-
-
-# Dictionary containing all collected items carried
 
 func _ready():
 	globals.add_item(0, "Pencil", 1, 1)
 	globals.add_item(1, "Cup", 1, 1)
 	globals.add_item(2, "Brötchen", 1, 1, 2)
 	globals.player_money = 10
-	
-	$BackgroundPanel/VBoxContainer/HBoxContainer/Amount.text = String(globals.check_item_amount(0))
-	$BackgroundPanel/VBoxContainer/HBoxContainer2/Amount.text = String(globals.check_item_amount(1))
+
 
 func _process(delta):
-	$BackgroundPanel/VBoxContainer/HBoxContainer/Amount.text = String(globals.check_item_amount(0))
-	$BackgroundPanel/VBoxContainer/HBoxContainer2/Amount.text = String(globals.check_item_amount(1))
-	
-	if !globals.check_item_amount(0):
-		$BackgroundPanel/VBoxContainer/HBoxContainer/Remove_from.disabled = true
-	else:
-		$BackgroundPanel/VBoxContainer/HBoxContainer/Remove_from.disabled = false
-	if !globals.check_item_amount(1):
-		$BackgroundPanel/VBoxContainer/HBoxContainer2/Remove_from.disabled = true
-	else:
-		$BackgroundPanel/VBoxContainer/HBoxContainer2/Remove_from.disabled = false
+	pass
 
 func drop():
 	#drop item
@@ -43,20 +23,62 @@ func drop():
 	item.translation = p_pos
 	get_tree().get_root().add_child(item)
 
+func create_itemlist_control_node(name, amount, ID):
+	# Create a single item slot in the inventory list (eg in the chest stuff)
+	var newContainer
+	var newLabel
+	var newAmnt
+	var newButton
+	newContainer = HBoxContainer.new()
+	
+	newLabel = Label.new()
+	newLabel.text = String(name)
+	newLabel.rect_min_size = Vector2(150, 0)
+	newLabel.add_font_override("font", load("res://Misc/Fonts/FONT_STANDARD_24.tres"))
+	
+	newAmnt = Label.new()
+	newAmnt.text = String(amount)
+	newAmnt.rect_min_size = Vector2(50, 0)
+	newAmnt.add_font_override("font", load("res://Misc/Fonts/FONT_CURSIVE_24.tres"))
+	
+	
+	newButton = Button.new()
+	newButton.add_font_override("font", load("res://Misc/Fonts/FONT_STANDARD_24.tres"))
+	newButton.text = "Fallen lassen"
 
-func _pencil_add_to_pressed():
-	# Add a pencil
-	globals.change_item_amount(1, 0)
+	
+	# Add signal, connect to self upon being pressed
+	newButton.connect("pressed", self, "_on_button_transfer_press", [ID, String(name)])
+	
+	newContainer.add_child(newLabel)
+	newContainer.add_child(newAmnt)
+	newContainer.add_child(newButton)
+		
+	return newContainer
 
-func _pencil_remove_from_pressed():
-	# Remove a pencil
-	globals.change_item_amount(-1, 0)
+func fill_personal_itemlist():
+	# Fill Player inventory with player inventory
+	# Same as above, but using playerinventory dict stored globally
+	# But the keys are item_name and not the objects themselves
+	var dict = {}
+	for i in globals.inventoryContents:
+		dict[i.item_ID] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
+#		print(dict[i.item_ID])
+		
+	var listitems = $BackgroundPanel/VBoxContainer/Scroller/Listitems
+	# Delete all pre-existing children
+	for c in listitems.get_children():
+		c.queue_free()
+	# Populate with new children
+	var new
+	for i in dict:
+		new = create_itemlist_control_node(dict[i][0], dict[i][1], i)  # ITEM_NAME, AMT
+		listitems.add_child(new)
+
+
+func _on_button_transfer_press(ID, name):
+	globals.change_item_amount(-1, ID)
 	drop()
 
-
-func _cup_add_to_pressed():
-	globals.change_item_amount(1, 1)
-
-
-func _cup_remove_from_pressed():
-	globals.change_item_amount(-1, 1)
+func _on_BackgroundPanel_visibility_changed():
+	fill_personal_itemlist()
