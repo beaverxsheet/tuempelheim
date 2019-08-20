@@ -14,6 +14,7 @@ func _ready():
 	$MainHUD/ItemDemonstrator.hide()
 	$Chest.hide()
 	$Shop.hide()
+	$Chat.hide()
 	var globals = get_node("/root/globals")
 	
 

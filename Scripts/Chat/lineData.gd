@@ -7,12 +7,12 @@ var linkTos
 var commands
 var endNow
 
-func _init(uniqueID, speakerID, content, linkTos, commands):
-	uniqueID = uniqueID
-	speakerID = speakerID
-	content = content
-	linkTos = linkTos
-	commands = commands
+func _init(_uniqueID, _speakerID, _content, _linkTos, _commands):
+	uniqueID  = _uniqueID
+	speakerID = _speakerID
+	content   = _content
+	linkTos   = _linkTos
+	commands  = _commands
 
 	endNow = false
 
