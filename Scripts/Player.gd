@@ -42,6 +42,7 @@ var to = Vector3()
 var find = false
 
 onready var globals = get_node("/root/globals")
+onready var chat_global = get_node("/root/chat_global")
 onready var scene_changer = get_node("/root/Change_Scene")
 
 enum {
@@ -58,6 +59,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_width_center = OS.get_window_size().x / 2
 	camera_height_center = OS.get_window_size().y / 2
+	
+	chat_global.parseSheet(chat_global.readSheet("res://Testers/testchat"))
 
 func _input(event):
 	if event is InputEventMouseMotion and cam_on:

@@ -34,6 +34,7 @@ config/icon="res://icon.png"
 
 globals="*res://Scripts/globals.gd"
 Change_Scene="*res://Scenes/Change_Scene.tscn"
+chat_global="*res://Scripts/Chat/chat_global.gd"
 
 [display]
 
