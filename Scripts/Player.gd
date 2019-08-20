@@ -121,7 +121,7 @@ func _physics_process(delta):
 						"WorldInteractor":
 							res.collider.interact_onclick()
 						"NPC":
-							print("is an NPC")
+							res.collider.interact_onclick()
 			find = false
 		
 		# Show shit in crosshairs

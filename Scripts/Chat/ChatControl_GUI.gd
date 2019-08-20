@@ -1,5 +1,7 @@
 extends Control
 
+onready var cc = preload("res://Scripts/Chat/convoController.gd")
+
 func _ready():
 	loop_to_fill_chat_options(["hi", "no", "place"])
 
@@ -28,3 +30,6 @@ func loop_to_fill_chat_options(inarray):
 		
 func _on_chat_option_chosen(ID):
 	print(ID)
+	
+func begin_chat(source):
+	cc.new(source)

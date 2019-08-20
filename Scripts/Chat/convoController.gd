@@ -1,8 +1,11 @@
 extends Object
 
-onready var ld = preload("res://Scripts/Chat/lineData.gd")
-
+var ld = preload("res://Scripts/Chat/lineData.gd")
 var lineObjects = []
+
+func _init(source):
+	parseSheet(readSheet(source))
+	print("it worked")
 
 func readSheet(filename):
 	# Read and return contents of a chat file NOT PARSED
@@ -19,6 +22,6 @@ func parseSheet(content):
 	
 	for line in byLine:
 		var info = Array(line.split("|"))
-		info.pop_back()
-		var currObj = ld.lineData(info[0], info[1], info[2], info[3], info[4])
+		print(info)
+		var currObj = ld.new(info[0], info[1], info[2], info[3], info[4])
 		lineObjects.append(currObj)
