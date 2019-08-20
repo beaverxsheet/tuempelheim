@@ -23,6 +23,8 @@ func create_chat_control_node(text, ID):
 func loop_to_fill_chat_options(inarray):
 	# Show all chat reply options on sceen by repeatedly calling the function that creates the actual buttons
 	var container = $CPanel/Overbox/Scroll/VBox
+	for child in container.get_children():
+		child.queue_free()
 	var i = 0 # Counter to increment ID
 	for text in inarray:
 		# Create button for each option
@@ -35,6 +37,8 @@ func _on_chat_option_chosen(ID):
 func begin_chat(source):
 	show()
 	active = cc.new(source)
+	$CPanel/Overbox/Label.text = active.NPC_statement
+	loop_to_fill_chat_options(active.nextUps_text)
 	
 func cancel_chat():
 	hide()
