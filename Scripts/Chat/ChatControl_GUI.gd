@@ -19,7 +19,7 @@ func create_chat_control_node(text, ID):
 
 func loop_to_fill_chat_options(inarray):
 	# Show all chat reply options on sceen by repeatedly calling the function that creates the actual buttons
-	var container = $CPanel/Scroll/VBox
+	var container = $CPanel/Overbox/Scroll/VBox
 	var i = 0 # Counter to increment ID
 	for text in inarray:
 		# Create button for each option

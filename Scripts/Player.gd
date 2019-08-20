@@ -117,8 +117,11 @@ func _physics_process(delta):
 						globals.change_item_amount(1,res.collider.ID)
 						res.collider.pickup()
 					# Interact with WorldInteractors
-					if "is_world_interactor" in res.collider:
-						res.collider.interact_onclick()
+					match res.collider.get_class():
+						"WorldInteractor":
+							res.collider.interact_onclick()
+						"NPC":
+							print("is an NPC")
 			find = false
 		
 		# Show shit in crosshairs

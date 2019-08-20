@@ -63,3 +63,8 @@ func change_item_amount(change, item_id):
 		
 func check_item_amount(item_id):
 	return chest_inventory.get(item_id, 0)
+	
+	
+# OVERRIDE so the type can be referred
+func get_class(): return "WorldInteractor"
+func is_class(type): return type == "WorldInteractor" or .is_class(type)
