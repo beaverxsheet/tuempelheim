@@ -42,7 +42,7 @@ var to = Vector3()
 var find = false
 
 onready var globals = get_node("/root/globals")
-onready var convo_controller = get_node("res://Scripts/Chat/convoController.gd")
+onready var convo_controller = preload("res://Scripts/Chat/convoController.gd")
 onready var scene_changer = get_node("/root/Change_Scene")
 
 enum {
