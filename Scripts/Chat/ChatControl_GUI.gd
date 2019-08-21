@@ -1,6 +1,7 @@
 extends Control
 
 onready var cc = preload("res://Scripts/Chat/convoController.gd")
+onready var top = $CPanel/Overbox/Label
 var active
 
 func _ready():
@@ -32,14 +33,25 @@ func loop_to_fill_chat_options(inarray):
 		i += 1
 		
 func _on_chat_option_chosen(ID):
+	update_chat(ID)
 	print(ID)
 	
 func begin_chat(source):
 	show()
 	active = cc.new(source)
-	$CPanel/Overbox/Label.text = active.NPC_statement
+	add_child(active)
+	top.text = active.topStatement
 	loop_to_fill_chat_options(active.nextUps_text)
 	
 func cancel_chat():
 	hide()
 	active.destroy()
+	
+func update_chat(ID):
+	active.continueConversation(ID)
+	if active.convoRunning:
+		top.text = active.topStatement
+		loop_to_fill_chat_options(active.nextUps_text)
+	else:
+		# End and close
+		$Exit.emit_signal("pressed")

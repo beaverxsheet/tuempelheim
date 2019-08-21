@@ -4,20 +4,24 @@ var ld = preload("res://Scripts/Chat/lineData.gd")
 var lineObjects = []
 var currentObject
 var convoRunning
-var NPC_statement = ""
+var topStatement = ""
 var nextUps
 var nextUps_text
+var endNext
+
+#signal updateNow
 
 func _init(source):
 	# Load data
 	parseSheet(readSheet(source))
 	# Set important values now
 	convoRunning = true
+	endNext = false
 	
 	# Switch to first lineobject
 	switchCurrentObject(lineObjects[0])
 	# Show first line
-	NPC_statement = currentObject.giveContent()
+	topStatement = currentObject.giveContent()
 	# Read first line nexts in
 	nextUps = currentObject.giveReplyOptions()
 	nextUps_text = currentObject.giveReplyOptions(false)
@@ -57,7 +61,32 @@ func continueConversation(nextUp):
 	# Helper to move on to the next statement    
 	# nextUps actually gives the line the player says
 	# so we need to move on to the one that the player statement links to
-	pass
+	# nextUp is an INTEGER
+	if !endNext:
+		switchCurrentObject(nextUps[nextUp]) # SWITCH TO THE LINEOBJECT THAT YOU JUST CHOSE
+	else:
+		endConversation()
+	if currentObject.endNow == true: # Player ends conversation
+		endConversation()
+	else:
+		# SWITCH (if applicable) TO THE LINEOBJECT THAT COMES AS A REPLY TO YOUR REPLY
+		switchCurrentObject(currentObject.compareAndFinder(currentObject.linkTos[0], lineObjects))
+		topStatement = currentObject.giveContent()
+		if currentObject.endNow == true:
+			sayGoodbye()
+		else:
+			nextUps = currentObject.giveReplyOptions()
+			nextUps_text = currentObject.giveReplyOptions(false)
+
+
+func endConversation(sayGoodbye=false):
+	# Helper to end the conversation
+	convoRunning = false
+	
+func sayGoodbye():
+	# Helper to end conversation NEXT click
+	endNext = true
+	nextUps_text = ["*Gehen*"]
 
 
 func switchCurrentObject(new):
