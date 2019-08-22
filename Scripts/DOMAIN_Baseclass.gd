@@ -8,6 +8,7 @@ class_name Domain
 func _ready():
 	load_state()
 
+
 func load_state():
 	var save_game = File.new()
 	savname = get_savename()
@@ -16,13 +17,15 @@ func load_state():
 		print("does not exist")
 		return null
 	
-	# Update all children
-	var save_nodes = get_persisting_winteractors()
-	
 	save_game.open(savname, File.READ)
 	while not save_game.eof_reached():
-		var current_line = parse_json(save_game.get_line())
-		print(current_line)
+		var line = save_game.get_line()
+		print(line)
+		var p = JSON.parse(line)
+		if typeof(p.result) == TYPE_DICTIONARY:
+	    	p.result["name"]
+		else:
+	    	pass
 
 func get_fname_identifier(object):
 	var name = object.filename
