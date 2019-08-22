@@ -32,7 +32,7 @@ export(bool) var can_shop_buy = false
 func interact_onclick():
 	match interactor_type:
 		DOOR:
-			scene_changer.scene_change_and_fade(points_to)
+			scene_changer.scene_change_and_fade(points_to, get_tree().get_current_scene())
 			return true
 		BUTTON:
 			pass

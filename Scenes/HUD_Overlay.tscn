@@ -220,11 +220,13 @@ custom_fonts/font = ExtResource( 4 )
 text = "Zurück"
 
 [node name="Shop" type="Control" parent="."]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ShopInventory" type="PanelContainer" parent="Shop"]
+editor/display_folded = true
 anchor_bottom = 1.0
 margin_right = 350.0
 
@@ -276,6 +278,7 @@ text = "0€"
 align = 2
 
 [node name="YourInventory" type="PanelContainer" parent="Shop"]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
