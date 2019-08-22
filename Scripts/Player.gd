@@ -42,6 +42,7 @@ var to = Vector3()
 var find = false
 
 onready var globals = get_node("/root/globals")
+onready var convo_controller = preload("res://Scripts/Chat/convoController.gd")
 onready var scene_changer = get_node("/root/Change_Scene")
 
 enum {
@@ -58,6 +59,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_width_center = OS.get_window_size().x / 2
 	camera_height_center = OS.get_window_size().y / 2
+	
+	convo_controller.parseSheet(convo_controller.readSheet("res://Testers/testchat"))
 
 func _input(event):
 	if event is InputEventMouseMotion and cam_on:
@@ -114,8 +117,11 @@ func _physics_process(delta):
 						globals.change_item_amount(1,res.collider.ID)
 						res.collider.pickup()
 					# Interact with WorldInteractors
-					if "is_world_interactor" in res.collider:
-						res.collider.interact_onclick()
+					match res.collider.get_class():
+						"WorldInteractor":
+							res.collider.interact_onclick()
+						"NPC":
+							res.collider.interact_onclick()
 			find = false
 		
 		# Show shit in crosshairs

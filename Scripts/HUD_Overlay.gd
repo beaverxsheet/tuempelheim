@@ -14,6 +14,7 @@ func _ready():
 	$MainHUD/ItemDemonstrator.hide()
 	$Chest.hide()
 	$Shop.hide()
+	$Chat.hide()
 	var globals = get_node("/root/globals")
 	
 
@@ -176,3 +177,6 @@ func _on_close_ShopInventory_pressed():
 func _on_close_ChestInventory_pressed():
 	# Close Chest UI
 	show_chest_inventory = false
+	
+func _on_open_chat():
+	print("it worked")

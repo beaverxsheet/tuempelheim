@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Chat/ChatControl_GUI.gd" type="Script" id=1]
+[ext_resource path="res://Misc/Fonts/FONT_STANDARD_24.tres" type="DynamicFont" id=2]
+
+[node name="Chat" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="CPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -350.0
+margin_top = -200.0
+margin_right = 350.0
+
+[node name="Overbox" type="VBoxContainer" parent="CPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 693.0
+margin_bottom = 193.0
+
+[node name="Label" type="Label" parent="CPanel/Overbox"]
+margin_right = 686.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 2 )
+text = "NPC Text"
+
+[node name="Scroll" type="ScrollContainer" parent="CPanel/Overbox"]
+margin_top = 28.0
+margin_right = 686.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBox" type="VBoxContainer" parent="CPanel/Overbox/Scroll"]
+margin_right = 686.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Exit" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -132.0
+margin_top = -45.0
+margin_right = -15.0
+margin_bottom = -15.0
+custom_fonts/font = ExtResource( 2 )
+text = "Verlassen"

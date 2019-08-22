@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/HUD_Overlay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Crosshair.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Misc/Fonts/FONT_CURSIVE_24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Misc/Fonts/FONT_HEADER_40.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Scenes/Ingame_Control.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/ChatControl_GUI.tscn" type="PackedScene" id=8]
 
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
@@ -132,6 +133,8 @@ text = "Ziel"
 align = 1
 
 [node name="Chest" type="Control" parent="."]
+editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -217,7 +220,6 @@ custom_fonts/font = ExtResource( 4 )
 text = "Zurück"
 
 [node name="Shop" type="Control" parent="."]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -345,5 +347,7 @@ text = "Zurück"
 
 [node name="Control" parent="." instance=ExtResource( 7 )]
 visible = false
+
+[node name="Chat" parent="." instance=ExtResource( 8 )]
 [connection signal="pressed" from="Chest/CenterBackPanel/Button" to="." method="_on_close_ChestInventory_pressed"]
 [connection signal="pressed" from="Shop/CenterBackPanel/Button" to="." method="_on_close_ShopInventory_pressed"]
