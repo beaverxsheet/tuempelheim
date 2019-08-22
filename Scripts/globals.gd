@@ -10,9 +10,17 @@ enum {
 	TOOL
 }
 
+const saveLocation = "res://Savetests/"
+
 var itemArray = []
 var inventoryContents = {}
 var player_money = 0
+
+func _ready():
+	add_item(0, "Pencil", 1, 1)
+	add_item(1, "Cup", 1, 1)
+	add_item(2, "Brötchen", 1, 1, CONSUMABLE)
+	player_money = 10
 
 func add_item(item_ID, item_name, weight, value, item_type=MISC, is_unique=false):
 	var item = b_class.new()

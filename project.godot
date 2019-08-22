@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "Domain",
+"language": "GDScript",
+"path": "res://Scripts/DOMAIN_Baseclass.gd"
+}, {
 "base": "Object",
 "class": "Ingame_Item",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/WORLDINTERACTOR_baseclass.gd"
 } ]
 _global_script_class_icons={
+"Domain": "",
 "Ingame_Item": "",
 "NPC": "",
 "WorldInteractor": ""

@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var item_in_crosshairs = null
+var item_in_crosshairs = [null, null]
 var inventory_shown = false
 
 var show_chest_inventory = false
@@ -120,7 +120,8 @@ func fill_chest_and_personal_itemlists(the_actual_object):
 	# Use chest inventory and display
 	var c_inventory = {}
 	for i in chest_in_focus.chest_inventory:
-		c_inventory[i] = [globals.itemArray[i].item_name, chest_in_focus.chest_inventory[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
+		c_inventory[int(i)] = [globals.itemArray[int(i)].item_name, chest_in_focus.chest_inventory[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
+#	print(c_inventory)
 	loop_to_create_itemlist($Chest/ChestInventory/VBoxContainer/ScrollContainer/ScrollableItems, c_inventory)
 	
 	# Fill Player inventory with player inventory
@@ -138,7 +139,7 @@ func fill_shop_and_personal_itemlists(the_actual_object, can_buy=false):
 	# Use shop inventory and display
 	var s_inventory = {}
 	for i in shop_in_focus.chest_inventory:
-		s_inventory[i] = [globals.itemArray[i].item_name, shop_in_focus.chest_inventory[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
+		s_inventory[int(i)] = [globals.itemArray[int(i)].item_name, shop_in_focus.chest_inventory[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
 	loop_to_create_itemlist($Shop/ShopInventory/VBoxContainer/ScrollContainer/ScrollableItems, s_inventory, false, false, true)
 	
 	# Fill Player inventory with player inventory
