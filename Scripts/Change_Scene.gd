@@ -18,8 +18,20 @@ func scene_change_and_fade(path, origin, delay = 0.5):
 func save_persisting_worldinteractors(origin):
 	# Get persisting worldinteractors
 	var kids = origin.get_children()
-	var wIntertactors = []
+	var wInteractors = []
 	for node in kids:
 		if node.is_class("WorldInteractor"):
-			wIntertactors.append(node)
+			wInteractors.append(node)
+			
+	# Save persists
+	var save_game = File.new()
+	save_game.open("res://Savetests/savegame.sav", File.WRITE)
+	for i in wInteractors:
+		var save_dict = {
+			"name" : i.name,
+			"chest_inventory" : i.chest_inventory,
+			"money" : i.money
+		}
+		save_game.store_line(to_json(save_dict))
+	save_game.close()
 
