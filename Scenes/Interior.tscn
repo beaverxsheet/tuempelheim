@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Models/Doormaterial.material" type="Material" id=7]
 [ext_resource path="res://Scenes/BlueLocker.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 5 )
 

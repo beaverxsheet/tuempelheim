@@ -17,13 +17,27 @@ func load_state():
 		print("does not exist")
 		return null
 	
+	# Get dictionary linking winteractor objects and their names
+	var children = get_persisting_winteractors()
+	var child_dict = {}
+	for c in children:
+		child_dict[c.name] = c
+	
 	save_game.open(savname, File.READ)
 	while not save_game.eof_reached():
 		var line = save_game.get_line()
 		print(line)
 		var p = JSON.parse(line)
 		if typeof(p.result) == TYPE_DICTIONARY:
-	    	p.result["name"]
+			var actOn = child_dict[p.result["name"]]
+			print(actOn.chest_inventory)
+			print(p.result["chest_inventory"])
+#			var newInventory = {}
+#			for i in p.result["chest_inventory"].keys():
+#				newInventory[int(i)] = int(p.result["chest_inventory"][i])
+#			actOn.chest_inventory = p.result["chest_inventory"]
+#			actOn.money = p.result["money"]
+			pass
 		else:
 	    	pass
 
