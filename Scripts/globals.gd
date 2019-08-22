@@ -10,6 +10,8 @@ enum {
 	TOOL
 }
 
+const saveLocation = "res://Savetests/"
+
 var itemArray = []
 var inventoryContents = {}
 var player_money = 0
