@@ -4,13 +4,6 @@ onready var globals = get_node("/root/globals")
 onready var itm = preload("res://Scenes/Items.tscn")
 
 
-#func _ready():
-#	globals.add_item(0, "Pencil", 1, 1)
-#	globals.add_item(1, "Cup", 1, 1)
-#	globals.add_item(2, "Brötchen", 1, 1, globals.CONSUMABLE)
-#	globals.player_money = 10
-
-
 func _process(delta):
 	pass
 

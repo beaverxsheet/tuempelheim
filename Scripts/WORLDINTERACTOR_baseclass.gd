@@ -61,6 +61,9 @@ func change_item_amount(change, item_id):
 	else:
 		chest_inventory.erase(item_id)
 		
+func set_item_amount(info):
+	chest_inventory = info
+		
 func check_item_amount(item_id):
 	return chest_inventory.get(item_id, 0)
 	

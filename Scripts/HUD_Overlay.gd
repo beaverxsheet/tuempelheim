@@ -121,6 +121,7 @@ func fill_chest_and_personal_itemlists(the_actual_object):
 	var c_inventory = {}
 	for i in chest_in_focus.chest_inventory:
 		c_inventory[int(i)] = [globals.itemArray[int(i)].item_name, chest_in_focus.chest_inventory[i]] # {ITEM_ID: [ITEM_NAME, AMT]}
+#	print(c_inventory)
 	loop_to_create_itemlist($Chest/ChestInventory/VBoxContainer/ScrollContainer/ScrollableItems, c_inventory)
 	
 	# Fill Player inventory with player inventory
