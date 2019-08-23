@@ -1,14 +1,44 @@
 extends Spatial
 
 onready var globals = get_node("/root/globals")
+onready var cam_on = true
 var savname
 
 class_name Domain
 
+enum {
+	FREE_MOUSE,
+	CAPTURE_MOUSE,
+	OPEN_MENU,
+	CLOSE_MENU
+}
+
 func _ready():
 	# Update inventories of all containers, expand to all states of all winteractors
 	load_state()
+	for c in get_children():
+		c.pause_mode = Node.PAUSE_MODE_STOP
+	$Control.pause_mode = Node.PAUSE_MODE_PROCESS
+	pause_mode = Node.PAUSE_MODE_PROCESS
 
+func _process(delta):
+	if mouse_n_cam_bool_helper(FREE_MOUSE): # Uncapture mouse
+		capture_mouse_mode(false)
+	elif mouse_n_cam_bool_helper(CAPTURE_MOUSE): # Capture mouse
+		capture_mouse_mode(true)
+	elif mouse_n_cam_bool_helper(OPEN_MENU): # Show inventory
+		get_node("Control/Control").show()
+		$Control.inventory_shown = true
+		capture_mouse_mode(false)
+	elif mouse_n_cam_bool_helper(CLOSE_MENU): # Hide inventory
+		get_node("Control/Control").hide()
+		$Control.inventory_shown = false
+		capture_mouse_mode(true)
+	if Input.is_action_pressed("end"): # Quit
+		get_tree().quit()
+	if Input.is_action_just_pressed("ui_up") and not get_node("Control/Control").visible: # Switch scene tester
+		$Player.scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
+	$Player.fps.text = str(Engine.get_frames_per_second())
 
 func load_state():
 	var save_game = File.new()
@@ -61,7 +91,51 @@ func get_persisting_winteractors():
 	
 func get_savename():
 	return globals.saveLocation + get_fname_identifier(self) + ".sav"
-	
+
+func capture_mouse_mode(set=true, toggle=false):
+	# Change mouse mode
+	if toggle:
+		# Toggle mouse mode
+		if cam_on:
+			cam_on = false
+			$Player.cam_on = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			get_tree().paused = false
+		elif !cam_on:
+			cam_on = true
+			$Player.cam_on = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
+	elif !toggle:
+		# Set mouse mode regardless of current state
+		if set:
+			cam_on = true
+			$Player.cam_on = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			get_tree().paused = false
+		elif !set:
+			cam_on = false
+			$Player.cam_on = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
+	return cam_on
+
+func mouse_n_cam_bool_helper(case):
+	# Helper to clean up _process
+	match case:
+		FREE_MOUSE:
+			if Input.is_action_just_pressed("exit") and cam_on and not get_node("Control/Control").visible and not $Control.show_chest_inventory:
+				return true
+		CAPTURE_MOUSE:
+			if Input.is_action_just_pressed("exit") and not cam_on and not get_node("Control/Control").visible and not $Control.show_chest_inventory:
+				return true
+		OPEN_MENU:
+			if Input.is_action_just_pressed("inventory") and not get_node("Control/Control").visible and not $Control.show_chest_inventory:
+				return true
+		CLOSE_MENU:
+			if Input.is_action_just_pressed("inventory") and get_node("Control/Control").visible:
+				return true
+	return false
 
 # OVERRIDE so the type can be referred
 func get_class(): return "Domain"

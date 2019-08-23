@@ -42,15 +42,7 @@ var to = Vector3()
 var find = false
 
 onready var globals = get_node("/root/globals")
-onready var convo_controller = preload("res://Scripts/Chat/convoController.gd")
 onready var scene_changer = get_node("/root/Change_Scene")
-
-enum {
-	FREE_MOUSE,
-	CAPTURE_MOUSE,
-	OPEN_MENU,
-	CLOSE_MENU
-}
 
 func _ready():
 	# Connect to viewport_size_change
@@ -59,8 +51,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_width_center = OS.get_window_size().x / 2
 	camera_height_center = OS.get_window_size().y / 2
-	
-	convo_controller.parseSheet(convo_controller.readSheet("res://Testers/testchat"))
 
 func _input(event):
 	if event is InputEventMouseMotion and cam_on:
@@ -77,23 +67,7 @@ func _input(event):
 
 
 func _process(delta):
-	if mouse_n_cam_bool_helper(FREE_MOUSE): # Uncapture mouse
-		capture_mouse_mode(false)
-	elif mouse_n_cam_bool_helper(CAPTURE_MOUSE): # Capture mouse
-		capture_mouse_mode(true)
-	elif mouse_n_cam_bool_helper(OPEN_MENU): # Show inventory
-		get_parent().get_node("Control/Control").show()
-		get_node("../Control").inventory_shown = true
-		capture_mouse_mode(false)
-	elif mouse_n_cam_bool_helper(CLOSE_MENU): # Hide inventory
-		get_parent().get_node("Control/Control").hide()
-		get_node("../Control").inventory_shown = false
-		capture_mouse_mode(true)
-	if Input.is_action_pressed("end"): # Quit
-		get_tree().quit()
-	if Input.is_action_just_pressed("ui_up") and not get_parent().get_node("Control/Control").visible: # Switch scene tester
-		scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
-	fps.text = str(Engine.get_frames_per_second())
+	pass
 
 
 func _physics_process(delta):
@@ -117,11 +91,8 @@ func _physics_process(delta):
 						globals.change_item_amount(1,res.collider.ID)
 						res.collider.pickup()
 					# Interact with WorldInteractors
-					match res.collider.get_class():
-						"WorldInteractor":
-							res.collider.interact_onclick()
-						"NPC":
-							res.collider.interact_onclick()
+					if "is_world_interactor" in res.collider:
+						res.collider.interact_onclick()
 			find = false
 		
 		# Show shit in crosshairs
@@ -194,47 +165,6 @@ func viewport_size_changed():
 	# Update Viewport Width when Window gets resized
 	camera_width_center = OS.get_window_size().x / 2
 	camera_height_center = OS.get_window_size().y / 2
-
-func capture_mouse_mode(set=true, toggle=false):
-	# Change mouse mode
-	if toggle:
-		# Toggle mouse mode
-		if cam_on:
-			cam_on = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			get_tree().paused = false
-		elif !cam_on:
-			cam_on = true
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			get_tree().paused = true
-	elif !toggle:
-		# Set mouse mode regardless of current state
-		if set:
-			cam_on = true
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			get_tree().paused = false
-		elif !set:
-			cam_on = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			get_tree().paused = true
-	return cam_on
-
-func mouse_n_cam_bool_helper(case):
-	# Helper to clean up _process
-	match case:
-		FREE_MOUSE:
-			if Input.is_action_just_pressed("exit") and cam_on and not get_parent().get_node("Control/Control").visible and not get_node("../Control").show_chest_inventory:
-				return true
-		CAPTURE_MOUSE:
-			if Input.is_action_just_pressed("exit") and not cam_on and not get_parent().get_node("Control/Control").visible and not get_node("../Control").show_chest_inventory:
-				return true
-		OPEN_MENU:
-			if Input.is_action_just_pressed("inventory") and not get_parent().get_node("Control/Control").visible and not get_node("../Control").show_chest_inventory:
-				return true
-		CLOSE_MENU:
-			if Input.is_action_just_pressed("inventory") and get_parent().get_node("Control/Control").visible:
-				return true
-	return false
 
 func get_Distance(target):
 	# Gives distance from target
