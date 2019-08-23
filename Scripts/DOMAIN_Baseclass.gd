@@ -11,7 +11,8 @@ enum {
 	CAPTURE_MOUSE,
 	OPEN_MENU,
 	CLOSE_INVENTORY,
-	CLOSE_MENU
+	CLOSE_MENU,
+	LEAVE_CHAT
 }
 
 func _ready():
@@ -111,15 +112,15 @@ func mouse_n_cam_bool_helper(case):
 	match case:
 		FREE_MOUSE:
 			if (Input.is_action_just_pressed("exit") and cam_on and not get_node("Control/Control").visible
-			and not $Control.show_chest_inventory and not $Control.show_shop_inventory):
+			and not $Control.show_chest_inventory and not $Control.show_shop_inventory and not $Control/Chat.visible):
 				return true
 		CAPTURE_MOUSE:
 			if (Input.is_action_just_pressed("exit") and not cam_on and not get_node("Control/Control").visible
-			and not $Control.show_chest_inventory and not $Control.show_shop_inventory):
+			and not $Control.show_chest_inventory and not $Control.show_shop_inventory and not $Control/Chat.visible):
 				return true
 		OPEN_MENU:
 			if (Input.is_action_just_pressed("inventory") and not get_node("Control/Control").visible
-			 and not $Control.show_chest_inventory and not $Control.show_shop_inventory):
+			 and not $Control.show_chest_inventory and not $Control.show_shop_inventory and not $Control/Chat.visible):
 				return true
 		CLOSE_INVENTORY:
 			if Input.is_action_just_pressed("inventory") and get_node("Control/Control").visible:
@@ -127,6 +128,9 @@ func mouse_n_cam_bool_helper(case):
 		CLOSE_MENU:
 			if Input.is_action_just_pressed("exit") and ($Control.show_chest_inventory or $Control.show_shop_inventory
 			or $Control.inventory_shown):
+				return true
+		LEAVE_CHAT:
+			if Input.is_action_just_pressed("exit") and $Control/Chat.visible:
 				return true
 	return false
 
@@ -150,6 +154,8 @@ func handle_input():
 		get_node("Control/Control").hide()
 		$Control.inventory_shown = false
 		capture_mouse_mode(true)
+	elif mouse_n_cam_bool_helper(LEAVE_CHAT):
+		$Control/Chat/Exit.emit_signal("pressed")
 	if Input.is_action_pressed("end"): # Quit
 		get_tree().quit()
 	if Input.is_action_just_pressed("ui_up") and not get_node("Control/Control").visible: # Switch scene tester

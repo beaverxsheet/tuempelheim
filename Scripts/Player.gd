@@ -65,9 +65,6 @@ func _input(event):
 	else:
 		find = false
 
-func _process(delta):
-	pass
-
 func _physics_process(delta):
 
 	walk(delta)
@@ -89,7 +86,7 @@ func _physics_process(delta):
 						globals.change_item_amount(1,res.collider.ID)
 						res.collider.pickup()
 					# Interact with WorldInteractors
-					if "is_world_interactor" in res.collider:
+					if "is_world_interactor" in res.collider or res.collider.is_class("NPC"):
 						res.collider.interact_onclick()
 			find = false
 		
