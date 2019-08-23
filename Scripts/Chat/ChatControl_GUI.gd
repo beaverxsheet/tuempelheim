@@ -5,7 +5,7 @@ onready var top = $CPanel/Overbox/Label
 var active
 
 func _ready():
-	loop_to_fill_chat_options(["hi", "no", "place"])
+	pass
 
 
 func create_chat_control_node(text, ID):

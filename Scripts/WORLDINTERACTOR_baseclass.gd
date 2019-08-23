@@ -37,15 +37,15 @@ func interact_onclick():
 		BUTTON:
 			pass
 		CHEST:
-			get_node("../Player").capture_mouse_mode(false)
+			get_parent().capture_mouse_mode(false)
 			get_node("../Control").fill_chest_and_personal_itemlists(self)
 			yield(get_node("../Control/Chest/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
-			get_node("../Player").capture_mouse_mode(true)
+			get_parent().capture_mouse_mode(true)
 		SHOP:
-			get_node("../Player").capture_mouse_mode(false)
+			get_parent().capture_mouse_mode(false)
 			get_node("../Control").fill_shop_and_personal_itemlists(self)
 			yield(get_node("../Control/Shop/CenterBackPanel/Button"), "pressed") # Resume operations once close button pressed
-			get_node("../Player").capture_mouse_mode(true)
+			get_parent().capture_mouse_mode(true)
 			
 func change_item_amount(change, item_id):
 	var item = globals.itemArray[item_id]
