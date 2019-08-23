@@ -65,10 +65,8 @@ func _input(event):
 	else:
 		find = false
 
-
 func _process(delta):
 	pass
-
 
 func _physics_process(delta):
 
@@ -109,7 +107,6 @@ func _physics_process(delta):
 					get_node("../Control").item_in_crosshairs = [null, null]
 		else:
 			get_node("../Control").item_in_crosshairs = [null, null]
-
 
 func walk(delta):
 # reset the direction of the player

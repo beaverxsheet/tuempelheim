@@ -10,35 +10,21 @@ enum {
 	FREE_MOUSE,
 	CAPTURE_MOUSE,
 	OPEN_MENU,
+	CLOSE_INVENTORY,
 	CLOSE_MENU
 }
 
 func _ready():
 	# Update inventories of all containers, expand to all states of all winteractors
 	load_state()
+	# Make all children except the control (UI) node to pause during pause
 	for c in get_children():
 		c.pause_mode = Node.PAUSE_MODE_STOP
 	$Control.pause_mode = Node.PAUSE_MODE_PROCESS
 	pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _process(delta):
-	if mouse_n_cam_bool_helper(FREE_MOUSE): # Uncapture mouse
-		capture_mouse_mode(false)
-	elif mouse_n_cam_bool_helper(CAPTURE_MOUSE): # Capture mouse
-		capture_mouse_mode(true)
-	elif mouse_n_cam_bool_helper(OPEN_MENU): # Show inventory
-		get_node("Control/Control").show()
-		$Control.inventory_shown = true
-		capture_mouse_mode(false)
-	elif mouse_n_cam_bool_helper(CLOSE_MENU): # Hide inventory
-		get_node("Control/Control").hide()
-		$Control.inventory_shown = false
-		capture_mouse_mode(true)
-	if Input.is_action_pressed("end"): # Quit
-		get_tree().quit()
-	if Input.is_action_just_pressed("ui_up") and not get_node("Control/Control").visible: # Switch scene tester
-		$Player.scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
-	$Player.fps.text = str(Engine.get_frames_per_second())
+	handle_input()
 
 func load_state():
 	var save_game = File.new()
@@ -124,18 +110,51 @@ func mouse_n_cam_bool_helper(case):
 	# Helper to clean up _process
 	match case:
 		FREE_MOUSE:
-			if Input.is_action_just_pressed("exit") and cam_on and not get_node("Control/Control").visible and not $Control.show_chest_inventory:
+			if (Input.is_action_just_pressed("exit") and cam_on and not get_node("Control/Control").visible
+			and not $Control.show_chest_inventory and not $Control.show_shop_inventory):
 				return true
 		CAPTURE_MOUSE:
-			if Input.is_action_just_pressed("exit") and not cam_on and not get_node("Control/Control").visible and not $Control.show_chest_inventory:
+			if (Input.is_action_just_pressed("exit") and not cam_on and not get_node("Control/Control").visible
+			and not $Control.show_chest_inventory and not $Control.show_shop_inventory):
 				return true
 		OPEN_MENU:
-			if Input.is_action_just_pressed("inventory") and not get_node("Control/Control").visible and not $Control.show_chest_inventory:
+			if (Input.is_action_just_pressed("inventory") and not get_node("Control/Control").visible
+			 and not $Control.show_chest_inventory and not $Control.show_shop_inventory):
 				return true
-		CLOSE_MENU:
+		CLOSE_INVENTORY:
 			if Input.is_action_just_pressed("inventory") and get_node("Control/Control").visible:
 				return true
+		CLOSE_MENU:
+			if Input.is_action_just_pressed("exit") and ($Control.show_chest_inventory or $Control.show_shop_inventory
+			or $Control.inventory_shown):
+				return true
 	return false
+
+func handle_input():
+	# Formerly this function belonged to the player
+	if mouse_n_cam_bool_helper(FREE_MOUSE): # Uncapture mouse
+		capture_mouse_mode(false)
+	elif mouse_n_cam_bool_helper(CAPTURE_MOUSE): # Capture mouse
+		capture_mouse_mode(true)
+	elif mouse_n_cam_bool_helper(OPEN_MENU): # Show inventory
+		get_node("Control/Control").show()
+		$Control.inventory_shown = true
+		capture_mouse_mode(false)
+	elif mouse_n_cam_bool_helper(CLOSE_INVENTORY): # Hide inventory
+		get_node("Control/Control").hide()
+		$Control.inventory_shown = false
+		capture_mouse_mode(true)
+	elif mouse_n_cam_bool_helper(CLOSE_MENU):
+		$Control.show_chest_inventory = false
+		$Control.show_shop_inventory = false
+		get_node("Control/Control").hide()
+		$Control.inventory_shown = false
+		capture_mouse_mode(true)
+	if Input.is_action_pressed("end"): # Quit
+		get_tree().quit()
+	if Input.is_action_just_pressed("ui_up") and not get_node("Control/Control").visible: # Switch scene tester
+		$Player.scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
+	$Player.fps.text = str(Engine.get_frames_per_second())
 
 # OVERRIDE so the type can be referred
 func get_class(): return "Domain"
