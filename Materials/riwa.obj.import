@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/riwa.obj-646c68e3d2b74a2dc4bbe6530d6dd140.mesh"
+
+[deps]
+
+files=[ "res://.import/riwa.obj-646c68e3d2b74a2dc4bbe6530d6dd140.mesh" ]
+
+source_file="res://Materials/riwa.obj"
+dest_files=[ "res://.import/riwa.obj-646c68e3d2b74a2dc4bbe6530d6dd140.mesh", "res://.import/riwa.obj-646c68e3d2b74a2dc4bbe6530d6dd140.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
