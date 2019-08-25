@@ -61,7 +61,6 @@ func _input(event):
 		if rotation_degrees.x <= -85: rotation_degrees.x = -85
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		find = true
-		print("click")
 	else:
 		find = false
 

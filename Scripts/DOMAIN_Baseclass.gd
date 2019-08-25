@@ -30,10 +30,8 @@ func _process(delta):
 func load_state():
 	var save_game = File.new()
 	savname = get_savename()
-	print(savname)
 	# Check if filename exists
 	if not save_game.file_exists(savname):
-		print("does not exist")
 		return null
 	
 	# Get dictionary linking winteractor objects and their names
