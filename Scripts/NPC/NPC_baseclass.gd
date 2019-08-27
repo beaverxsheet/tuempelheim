@@ -2,6 +2,10 @@ extends KinematicBody
 
 class_name NPC
 
+onready var globals = get_node("/root/globals")
+var vertex = preload("res://Scripts/NPC/Dijkstra_Vertex.gd")
+var graph = preload("res://Scripts/NPC/Dijkstra_Graph.gd")
+
 export(int) var NPCID = 0
 export(int, "idle", "walk_idle", "seek") var interactor_type = WALK_IDLE
 
@@ -14,6 +18,33 @@ enum {
 func _ready():
 	print(translation)
 	print(choose_random_nearby_target())
+	
+	# DIJKSTRA
+	var g = graph.new()
+	g.add_vertex('a')
+	g.add_vertex('b')
+	g.add_vertex('c')
+	g.add_vertex('d')
+	g.add_vertex('e')
+	g.add_vertex('f')
+
+	g.add_edge('a', 'b', 7)  
+	g.add_edge('a', 'c', 9)
+	g.add_edge('a', 'f', 14)
+	g.add_edge('b', 'c', 10)
+	g.add_edge('b', 'd', 15)
+	g.add_edge('c', 'd', 11)
+	g.add_edge('c', 'f', 2)
+	g.add_edge('d', 'e', 6)
+	g.add_edge('e', 'f', 9)
+	
+	# Check if graph is ok
+	for v in g.vert_dict.values():
+		for w in v.get_connections():
+			print(v.id, "-", w.id)
+			
+	globals.dijkstra(g, "a")
+	print(globals.shortest(g, "e"))
 
 func interact_onclick():
 	get_parent().capture_mouse_mode(false)
