@@ -87,6 +87,10 @@ func parseSheetGOAP(content):
 	byLine.pop_back()
 	
 	for line in byLine:
+		if !line:
+			# Ignore all empty lines
+			continue
+		
 		if line[0] == "#":
 			# Ignore all comments
 			continue
@@ -95,7 +99,7 @@ func parseSheetGOAP(content):
 		var info = Array(line.split("|"))
 		for i in len(info):
 			info[i] = info[i].strip_edges()
-		
+
 		match info[0]:
 			"NEWG":
 				if !g:

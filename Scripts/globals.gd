@@ -13,6 +13,7 @@ enum {
 const saveLocation = "res://Savetests/"
 
 var itemArray = []
+var goapArray = {}
 var inventoryContents = {}
 var player_money = 0
 

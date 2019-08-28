@@ -2,6 +2,7 @@ extends Node
 # Props to Bogotobogo.com and their python implementation
 
 var vertex = preload("res://Scripts/NPC/Dijkstra_Vertex.gd")
+onready var globals = get_node("/root/globals")
 var vert_dict; var num_vertices; var _name;
 
 func _init(givenname):
@@ -32,3 +33,6 @@ func add_edge(frm : String, to : String, cost = 0):
 	
 func get_vertices():
 	return vert_dict.keys()
+	
+func save():
+	globals.goapArray[_name] = self
