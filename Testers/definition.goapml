@@ -1,0 +1,12 @@
+# Hashtag denotes comment
+# Case new graph:
+#   NEWG | [Graph Name]
+# Case add vertex:
+#   VERT | [Vertex Name]
+# Case add edge: (also overwrites existing edges)
+#   EDGE | [Vertex From : String] | [Vertex To : String] | [Weight : Positive Integer]
+NEWG | goap
+VERT | johnson
+VERT | mayflower
+EDGE | johnson | mayflower | 3
+
