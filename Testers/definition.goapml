@@ -5,6 +5,10 @@
 #   VERT | [Vertex Name]
 # Case add edge: (also overwrites existing edges)
 #   EDGE | [Vertex From : String] | [Vertex To : String] | [Weight : Positive Integer]
+# Case assign function to vertex:
+#   FUNC | [Vertex to assign to : String] | [Command Sequence : String]
+
+
 NEWG | goaptest
 # VERT | getcart
 # VERT | getcash

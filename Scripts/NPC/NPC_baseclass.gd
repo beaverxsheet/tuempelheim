@@ -27,8 +27,6 @@ enum {
 }
 
 func _ready():
-	# DIJKSTRA
-	
 	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
 
 	globals.dijkstra(g, "idle")
@@ -37,7 +35,10 @@ func _ready():
 	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
 
 func _physics_process(delta):
-	walk(delta, gothisplace)
+	if translation.round() != gothisplace.round():
+		walk(delta, gothisplace)
+	else:
+		pass
 
 func interact_onclick():
 	get_parent().capture_mouse_mode(false)
