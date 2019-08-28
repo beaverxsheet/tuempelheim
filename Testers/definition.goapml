@@ -5,7 +5,14 @@
 #   VERT | [Vertex Name]
 # Case add edge: (also overwrites existing edges)
 #   EDGE | [Vertex From : String] | [Vertex To : String] | [Weight : Positive Integer]
-NEWG | goap
-VERT | johnson
-VERT | mayflower
-EDGE | johnson | mayflower | 3
+NEWG | goaptest
+# VERT | getcart
+# VERT | getcash
+# VERT | goshopping
+VERT | getloaf
+VERT | bedone
+VERT | idle
+VERT | walk
+EDGE | idle | walk | 1
+EDGE | walk | getloaf | 1
+EDGE | getloaf | done | 1

@@ -36,3 +36,9 @@ func get_vertices():
 	
 func save():
 	globals.goapArray[_name] = self
+
+func diagnostics():
+	# Check if graph is ok
+	for v in vert_dict.values():
+		for w in v.get_connections():
+			print(v.id, "-", w.id)

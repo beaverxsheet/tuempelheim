@@ -2,12 +2,23 @@ extends KinematicBody
 
 class_name NPC
 
+var velocity = Vector3()
+var direction = Vector3()
+var sprint_now = false
+const MOVE_SPEED = 10
+const RUN_SPEED = 30
+const GRAV = -10
+const ACCEL = 2
+const DEACCEL = 6
+
 onready var globals = get_node("/root/globals")
 var vertex = preload("res://Scripts/NPC/Dijkstra_Vertex.gd")
 var graph = preload("res://Scripts/NPC/Dijkstra_Graph.gd")
 
 export(int) var NPCID = 0
 export(int, "idle", "walk_idle", "seek") var interactor_type = WALK_IDLE
+
+var gothisplace
 
 enum {
 	IDLE,
@@ -19,33 +30,14 @@ func _ready():
 	# DIJKSTRA
 	
 	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
+
+	globals.dijkstra(g, "idle")
+	print(globals.shortest(g, "done"))
 	
-#	var g = graph.new()
-#	g.add_vertex('a')
-#	g.add_vertex('b')
-#	g.add_vertex('c')
-#	g.add_vertex('d')
-#	g.add_vertex('e')
-#	g.add_vertex('f')
-#
-#	g.add_edge('a', 'b', 7)  
-#	g.add_edge('a', 'c', 9)
-#	g.add_edge('a', 'f', 14)
-#	g.add_edge('b', 'c', 10)
-#	g.add_edge('b', 'd', 15)
-#	g.add_edge('c', 'd', 11)
-#	g.add_edge('c', 'f', 2)
-#	g.add_edge('d', 'e', 6)
-#	g.add_edge('e', 'f', 9)
-	
-	# Check if graph is ok
-	for v in g.vert_dict.values():
-		for w in v.get_connections():
-			print(v.id, "-", w.id)
-	
-	print(g._name)
-#	globals.dijkstra(g, "a")
-#	print(globals.shortest(g, "e"))
+	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
+
+func _physics_process(delta):
+	walk(delta, gothisplace)
 
 func interact_onclick():
 	get_parent().capture_mouse_mode(false)
@@ -63,7 +55,6 @@ func choose_random_nearby_target(max_range = 5, min_range = 3):
 	vec = vec.normalized()
 	return translation + vec * rand_range(min_range, max_range)
 	
-		
 func choose_target_given_vector(target_delta):
 	# Function returns a location that the NPC can walk to in IDLE_WALK
 	if target_delta is Vector3:
@@ -116,6 +107,40 @@ func parseSheetGOAP(content):
 			_:
 				pass
 	return g
+
+func walk(delta, goto : Vector3):
+# reset the direction of the player
+	direction = goto - translation
+	direction = direction.normalized()
+	
+	velocity.y += GRAV * delta
+	
+	var temp_velocity = velocity
+	temp_velocity.y = 0
+	
+	var speed
+	if sprint_now:
+		speed = RUN_SPEED
+	else:
+		speed = MOVE_SPEED
+	
+	# where would the player go at max speed
+	var target = direction * speed
+	
+	var acceleration
+	if direction.dot(temp_velocity) > 0:
+		acceleration = ACCEL
+	else:
+		acceleration = DEACCEL
+	
+	# calculate a portion of the distance to go
+	temp_velocity = temp_velocity.linear_interpolate(target, acceleration * delta)
+	
+	velocity.x = temp_velocity.x
+	velocity.z = temp_velocity.z
+	
+	# move
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
 
 # OVERRIDE so the type can be referred
 func get_class(): return "NPC"
