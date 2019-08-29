@@ -19,7 +19,7 @@ func _ready():
 	# Update inventories of all containers, expand to all states of all winteractors
 	load_state()
 	# Make all children except the control (UI) node to pause during pause
-	for c in get_children():
+	for c in get_node("Navigation/NavigationMeshInstance").get_children():
 		c.pause_mode = Node.PAUSE_MODE_STOP
 	$Control.pause_mode = Node.PAUSE_MODE_PROCESS
 	pause_mode = Node.PAUSE_MODE_PROCESS
