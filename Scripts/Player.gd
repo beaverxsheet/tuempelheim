@@ -65,7 +65,6 @@ func _input(event):
 		find = false
 
 func _physics_process(delta):
-
 	walk(delta)
 
 	if cam_on:

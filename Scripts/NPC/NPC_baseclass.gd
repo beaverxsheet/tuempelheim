@@ -2,16 +2,16 @@ extends KinematicBody
 
 class_name NPC
 
-var velocity = Vector3()
-var direction = Vector3()
 var sprint_now = false
+var path = []
+var path_ind = 0
 const MOVE_SPEED = 10
 const RUN_SPEED = 30
 const GRAV = -10
-const ACCEL = 2
-const DEACCEL = 6
 
 onready var globals = get_node("/root/globals")
+onready var nav = get_parent().get_node("Navigation")
+onready var player = get_parent().get_node("Player")
 var vertex = preload("res://Scripts/NPC/Dijkstra_Vertex.gd")
 var graph = preload("res://Scripts/NPC/Dijkstra_Graph.gd")
 
@@ -27,18 +27,17 @@ enum {
 }
 
 func _ready():
-	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
-
-	globals.dijkstra(g, "idle")
-	print(globals.shortest(g, "done"))
+#	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
+#
+#	globals.dijkstra(g, "idle")
+#	print(globals.shortest(g, "done"))
 	
-	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
+#	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
+	path = nav.get_simple_path(translation, get_parent().get_node("Position3D").translation)
 
 func _physics_process(delta):
-	if translation.round() != gothisplace.round():
-		walk(delta, gothisplace)
-	else:
-		pass
+	walk()
+	
 
 func interact_onclick():
 	get_parent().capture_mouse_mode(false)
@@ -109,39 +108,16 @@ func parseSheetGOAP(content):
 				pass
 	return g
 
-func walk(delta, goto : Vector3):
-# reset the direction of the player
-	direction = goto - translation
-	direction = direction.normalized()
-	
-	velocity.y += GRAV * delta
-	
-	var temp_velocity = velocity
-	temp_velocity.y = 0
-	
-	var speed
-	if sprint_now:
-		speed = RUN_SPEED
+func walk():
+	if path_ind < path.size():
+		var move_vec = (path[path_ind] - translation)
+		move_vec.y = 0
+		if move_vec.length() < 2:
+			path_ind += 1
+		else:
+			move_and_slide(move_vec.normalized() * MOVE_SPEED, Vector3(0, 1, 0))
 	else:
-		speed = MOVE_SPEED
-	
-	# where would the player go at max speed
-	var target = direction * speed
-	
-	var acceleration
-	if direction.dot(temp_velocity) > 0:
-		acceleration = ACCEL
-	else:
-		acceleration = DEACCEL
-	
-	# calculate a portion of the distance to go
-	temp_velocity = temp_velocity.linear_interpolate(target, acceleration * delta)
-	
-	velocity.x = temp_velocity.x
-	velocity.z = temp_velocity.z
-	
-	# move
-	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+		look_at(Vector3(player.translation.x, translation.y, player.translation.z), Vector3(0, 1, 0))
 
 # OVERRIDE so the type can be referred
 func get_class(): return "NPC"

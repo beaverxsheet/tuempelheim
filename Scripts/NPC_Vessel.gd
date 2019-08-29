@@ -8,7 +8,7 @@ onready var player_node = get_Player()
 var animplayer_child = null
 
 func _process(delta):
-	if get_Sprite_angle() == 0:
+	if get_Sprite_angle() == 1:
 		get_parent().get_node("Viewport/TestTyp").hide()
 		get_parent().get_node("Viewport/Testtyp_Back").show()
 	else:
