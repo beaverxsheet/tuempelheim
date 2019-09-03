@@ -27,12 +27,13 @@ enum {
 }
 
 func _ready():
-#	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
-#
-#	globals.dijkstra(g, "idle")
-#	print(globals.shortest(g, "done"))
+	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
+
+	globals.dijkstra(g, "idle")
+	print(globals.shortest(g, "done"))
 	
 #	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
+
 	path = nav.get_simple_path(translation, get_parent().get_node("Position3D").translation)
 
 func _physics_process(delta):
@@ -72,10 +73,10 @@ func readSheet(filename):
 
 func parseSheetGOAP(content):
 	# Parser for GOAP
-	var g
 	# Return PARSED contents
+	var g
+
 	var byLine = Array(content.split("\n"))
-	byLine.pop_back()
 	
 	for line in byLine:
 		if !line:
@@ -104,9 +105,34 @@ func parseSheetGOAP(content):
 			"EDGE":
 				if g:
 					g.add_edge(String(info[1]), String(info[2]), int(info[3]))
+			"FUNC":
+				parseCommandsGOAP(g.get_vertex(String(info[1])), String(info[2]), String(info[3]))
 			_:
 				pass
 	return g
+
+func parseCommandsGOAP(vert, funcname, arguments):
+	# parses GOAP commands into the funcname and the arguments (also turns into type)
+	var byPositional = Array(arguments.split("/"))
+	for i in len(byPositional):
+		byPositional[i] = byPositional[i].strip_edges()
+		byPositional[i] = Array(byPositional[i].split(":"))
+		match byPositional[i][0]:
+			"string":
+				byPositional[i] = String(byPositional[i][1])
+			"bool":
+				byPositional[i] = bool(byPositional[i][1])
+			"vec2":
+				pass
+			"vec3":
+				pass
+			"int":
+				byPositional[i] = int(byPositional[i][1])
+			"float":
+				byPositional[i] = float(byPositional[i][1])
+			"self":
+				byPositional[i] = self
+	print(byPositional)
 
 func walk():
 	if path_ind < path.size():
