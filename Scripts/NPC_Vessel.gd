@@ -17,18 +17,6 @@ func _process(delta):
 	
 
 
-func _on_ChatArea_body_entered(body):
-	if body == player_node:
-#		print('Hello there')
-		pass
-
-
-func _on_ChatArea_body_exited(body):
-	if body == player_node:
-#		print('Till we meet again')
-		pass
-
-
 func _on_WideArea_body_entered(body):
 	if body == player_node:
 		animplayer_child_back.play("Dance")

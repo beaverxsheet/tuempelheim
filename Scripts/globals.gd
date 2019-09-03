@@ -82,15 +82,10 @@ static func dijkstra(graph, source):
 		
 	Q.sort_custom(customSorter, "sort_dijkstra_distance") # Sort by ascending distance
 	
-#	for v in Q:
-#		print(v.distance, v.id)
-		
+
 	while Q:
-#		print(":")
 		Q.sort_custom(customSorter, "sort_dijkstra_distance") # Sort by ascending distance
 		
-#		for v in Q:
-#			print(v.distance, v.id)
 			
 		var u = Q[0] # Select vertex with shortest distance, remove from unvisited, make current vertex
 		Q.remove(0)

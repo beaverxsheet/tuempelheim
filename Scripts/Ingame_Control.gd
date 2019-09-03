@@ -56,12 +56,13 @@ func fill_personal_itemlist():
 	var dict = {}
 	for i in globals.inventoryContents:
 		dict[i.item_ID] = [i.item_name, globals.inventoryContents.get(i)] # {ITEM_ID: [ITEM_NAME, AMT]}
-#		print(dict[i.item_ID])
+
 		
 	var listitems = $BackgroundPanel/VBoxContainer/Scroller/Listitems
 	# Delete all pre-existing children
 	for c in listitems.get_children():
 		c.queue_free()
+
 	# Populate with new children
 	var new
 	for i in dict:

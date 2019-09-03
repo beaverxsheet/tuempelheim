@@ -78,16 +78,10 @@ def dijkstra(graph, source):
 
     Q.sort(key=lambda x: x.distance) # Sort array of objects by distance attribute
 
-    for v in Q:
-        print(v.distance, v.id)
 
     while Q:
-        print(":")
         Q.sort(key=lambda x: x.distance)
-        for v in Q:
-            print(v.distance, v.id)
         u = Q[0] # Return vertex with shortes distance
-        print(u)
         Q.pop(0)
 
         for v in u.get_connections():
@@ -97,7 +91,6 @@ def dijkstra(graph, source):
                     v.distance = alt
                     v.previous = u
             else:
-                # print("node already in use")
                 pass
     
 def shortest(v, path):
@@ -124,13 +117,6 @@ g.add_edge('c', 'd', 11)
 g.add_edge('c', 'f', 2)
 g.add_edge('d', 'e', 6)
 g.add_edge('e', 'f', 9)
-
-# print('Graph data:')
-# for v in g:
-    # for w in v.get_connections():
-        # vid = v.get_id()
-        # wid = w.get_id()
-        # print('( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w)))
 
 dijkstra(g, "c")
 

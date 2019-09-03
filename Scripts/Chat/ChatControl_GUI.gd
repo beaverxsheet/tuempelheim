@@ -34,7 +34,6 @@ func loop_to_fill_chat_options(inarray):
 		
 func _on_chat_option_chosen(ID):
 	update_chat(ID)
-	print(ID)
 	
 func begin_chat(source):
 	show()
