@@ -30,7 +30,7 @@ func _ready():
 	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
 
 	globals.dijkstra(g, "idle")
-	print(globals.shortest(g, "done"))
+	# print(globals.shortest(g, "done"))
 	
 #	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
 
@@ -106,13 +106,16 @@ func parseSheetGOAP(content):
 				if g:
 					g.add_edge(String(info[1]), String(info[2]), int(info[3]))
 			"FUNC":
-				parseCommandsGOAP(g.get_vertex(String(info[1])), String(info[2]), String(info[3]))
+				assert(len(info) == 5)
+				parseCommandsGOAP(g.get_vertex(String(info[1])), String(info[2]), String(info[3]), String(info[4]))
 			_:
 				pass
 	return g
 
-func parseCommandsGOAP(vert, funcname, arguments):
+func parseCommandsGOAP(vert, _funcname, _queuepos, arguments):
 	# parses GOAP commands into the funcname and the arguments (also turns into type)
+	var funcname = _funcname
+	var queuepos = int(_queuepos)
 	var byPositional = Array(arguments.split("/"))
 	for i in len(byPositional):
 		byPositional[i] = byPositional[i].strip_edges()
@@ -132,7 +135,7 @@ func parseCommandsGOAP(vert, funcname, arguments):
 				byPositional[i] = float(byPositional[i][1])
 			"self":
 				byPositional[i] = self
-	print(byPositional)
+	vert.add_execArray_step([funcname, byPositional, queuepos])
 
 func walk():
 	if path_ind < path.size():

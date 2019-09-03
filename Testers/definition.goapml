@@ -6,7 +6,7 @@
 # Case add edge: (also overwrites existing edges)
 #   EDGE | [Vertex From : String] | [Vertex To : String] | [Weight : Positive Integer]
 # Case assign function to vertex:
-#   FUNC | [Vertex to assign to : String] | [Command Sequence : String]
+#   FUNC | [Vertex to assign to : String] | [Queue position : Int] |[Command Sequence : String]
 # Command sequence description:
 #   [Godot function name : String] | [as many positional arguments in the form type:value] / [eg. float:14.56] / [eg. Vector3:3.1,5.6,7.8]
 
@@ -22,4 +22,8 @@ VERT | walk
 EDGE | idle | walk | 1
 EDGE | walk | getloaf | 1
 EDGE | getloaf | done | 1
-FUNC | walk | hello | float:123.4 / bool:true / string:fuckall 123
+
+FUNC | walk | hello | 5 | float:123.4 / bool:true / string:fuckall 123
+FUNC | walk | hello | 8 | float:123.4 / bool:true / string:this should come up last
+FUNC | walk | hello | 1 | float:123.4 / bool:true / string:fuckall first
+
