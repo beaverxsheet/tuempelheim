@@ -113,29 +113,30 @@ func parseSheetGOAP(content):
 	return g
 
 func parseCommandsGOAP(vert, _funcname, _queuepos, arguments):
-	# parses GOAP commands into the funcname and the arguments (also turns into type)
+	# parses GOAP commands into the funcname, order num and the arguments (also turns into type)
 	var funcname = _funcname
 	var queuepos = int(_queuepos)
-	var byPositional = Array(arguments.split("/"))
-	for i in len(byPositional):
-		byPositional[i] = byPositional[i].strip_edges()
-		byPositional[i] = Array(byPositional[i].split(":"))
-		match byPositional[i][0]:
+	var byPos = Array(arguments.split("/"))
+	for i in len(byPos):
+		byPos[i] = byPos[i].strip_edges()
+		byPos[i] = Array(byPos[i].split(":"))
+		match byPos[i][0]:
 			"string":
-				byPositional[i] = String(byPositional[i][1])
+				byPos[i] = String(byPos[i][1])
 			"bool":
-				byPositional[i] = bool(byPositional[i][1])
+				byPos[i] = bool(byPos[i][1])
 			"vec2":
-				pass
+				byPos[i] = Vector2(byPos[i][1], byPos[i][2])
 			"vec3":
-				pass
+				byPos[i] = Vector3(byPos[i][1], byPos[i][2], byPos[i][3])
 			"int":
-				byPositional[i] = int(byPositional[i][1])
+				byPos[i] = int(byPos[i][1])
 			"float":
-				byPositional[i] = float(byPositional[i][1])
+				byPos[i] = float(byPos[i][1])
 			"self":
-				byPositional[i] = self
-	vert.add_execArray_step([funcname, byPositional, queuepos])
+				byPos[i] = self
+	vert.add_execArray_step([funcname, byPos, queuepos])
+	print(vert.execArray)
 
 func walk():
 	if path_ind < path.size():
