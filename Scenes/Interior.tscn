@@ -44,6 +44,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16834, 6.21927, -3.29831 )
 visible = false
 
 [node name="interior_testbuilding" type="MeshInstance" parent="."]
+editor/display_folded = true
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 5.66754, 0 )
 mesh = ExtResource( 4 )
 material/0 = SubResource( 1 )
@@ -55,6 +56,7 @@ material/1 = null
 shape = SubResource( 2 )
 
 [node name="Door" type="StaticBody" parent="."]
+editor/display_folded = true
 transform = Transform( -4.37114e-08, 0, -1, 0, 2.71344, 0, 1.93006, 0, -8.43655e-08, -3.35556, 5.28784, 3.00722 )
 script = ExtResource( 6 )
 chest_inventory = {

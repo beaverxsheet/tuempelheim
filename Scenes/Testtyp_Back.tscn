@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Sprites/Testsprite_full.png" type="Texture" id=1]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Dance"
 length = 2.0
 loop = true
@@ -391,8 +391,7 @@ tracks/31/keys = {
 "values": [ -257.779, -257.779, -257.779 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Wave"
+[sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Skeleton2D/Hip/LegR:position")
@@ -780,13 +779,11 @@ tracks/31/keys = {
 }
 
 [node name="Testtyp_Back" type="Node2D"]
-position = Vector2( -8.40942, -264.898 )
+position = Vector2( 950, 900 )
 
 [node name="Polygons" type="Node2D" parent="."]
-editor/display_folded = true
 position = Vector2( 1.16632, 1.16635 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -842,6 +839,7 @@ bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
 internal_vertex_count = 4
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
+editor/display_folded = true
 
 [node name="Hip" type="Bone2D" parent="Skeleton2D"]
 position = Vector2( 15.1052, -324.76 )
@@ -849,18 +847,16 @@ rest = Transform2D( 1, 0, 0, 1, 15.1052, -324.76 )
 
 [node name="Chest" type="Bone2D" parent="Skeleton2D/Hip"]
 position = Vector2( -1.34201, -133.441 )
-rotation = -0.0353546
 rest = Transform2D( 1, 0, 0, 1, -1.34201, -133.441 )
 
 [node name="ArmL" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
 position = Vector2( -94.474, -39.6558 )
-rotation = 3.1051
+rotation = 1.57079
 scale = Vector2( 0.664566, 0.725676 )
 rest = Transform2D( -0.566865, 0.346859, -0.378755, -0.618992, -94.474, -39.6558 )
 
 [node name="ForeArmL" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmL"]
 position = Vector2( 148.704, 32.6868 )
-rotation = 0.410775
 scale = Vector2( 1.67567, 1.41719 )
 rest = Transform2D( 1.67567, 0, 0, 1.41719, 148.704, 32.6868 )
 
@@ -871,14 +867,13 @@ scale = Vector2( 2.1241, 2.43829 )
 rest = Transform2D( 2.05173, 0.549757, -0.631076, 2.35521, 39.5654, 9.40842 )
 
 [node name="ArmR" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
-position = Vector2( 95.3302, -35.4313 )
-rotation = 0.036895
+position = Vector2( 112.747, -12.587 )
+rotation = -1.28876
 scale = Vector2( 0.664566, 0.725676 )
 rest = Transform2D( 0.664488, 0.0101718, -0.0111072, 0.725591, 99.1394, -45.4875 )
 
 [node name="ForeArmR" type="Bone2D" parent="Skeleton2D/Hip/Chest/ArmR"]
 position = Vector2( 148.704, 32.6868 )
-rotation = -0.154582
 scale = Vector2( 1.67567, 1.41719 )
 rest = Transform2D( 1.67567, 0, 0, 1.41719, 148.704, 32.6868 )
 
@@ -933,5 +928,5 @@ rest = Transform2D( 0.341393, 0, 0, 0.99419, 20.4218, 1.06726 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Wave"
 playback_default_blend_time = 0.5
-anims/Dance = SubResource( 2 )
-anims/Wave = SubResource( 1 )
+anims/Dance = SubResource( 1 )
+anims/Wave = SubResource( 2 )
