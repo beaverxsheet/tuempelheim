@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/DOMAIN_Baseclass.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/LocID_15_I.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/HUD_Overlay.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/WORLDINTERACTOR_baseclass.gd" type="Script" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.10057, 2.70397, 0.533823 )
+
+[node name="World" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="LocID_15_I" parent="." instance=ExtResource( 2 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37099, 0.537165, -0.671618 )
+
+[node name="Control" parent="." instance=ExtResource( 4 )]
+
+[node name="WorldInteractor" type="StaticBody" parent="."]
+script = ExtResource( 5 )
+door_describe_target = "Outside"
+
+[node name="CollisionShape" type="CollisionShape" parent="WorldInteractor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19678, 1.25533, 1.46328 )
+shape = SubResource( 1 )
