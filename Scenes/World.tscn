@@ -74,18 +74,18 @@ shape = SubResource( 3 )
 [node name="TestBuilding" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86524, 9.81871 )
 
-[node name="Door" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+[node name="Door" type="StaticBody" parent="Navigation/NavigationMeshInstance/TestBuilding"]
 editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02081, 3.90527, 8.14649 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02081, 0.04003, -1.67222 )
 script = ExtResource( 7 )
 points_to = "res://Scenes/Interior.tscn"
 
-[node name="Cube" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Door"]
+[node name="Cube" type="MeshInstance" parent="Navigation/NavigationMeshInstance/TestBuilding/Door"]
 transform = Transform( 2.86577, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 4 )
 material/0 = ExtResource( 8 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Door"]
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/TestBuilding/Door"]
 shape = SubResource( 5 )
 
 [node name="LocID_15" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 9 )]

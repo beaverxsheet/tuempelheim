@@ -72,7 +72,7 @@ func _physics_process(delta):
 		from = $Camera.project_ray_origin(mouse_pos)
 		to = from + $Camera.project_ray_normal(mouse_pos) * RAY_LEN
 		var space_state = get_world().direct_space_state
-		var res = space_state.intersect_ray(from,to,[self])
+		var res = space_state.intersect_ray(from,to,[self, get_node("../Navigation"), get_node("../Navigation/NavigationMeshInstance")])
 		
 		# Find ID of object that has been acted upon with mouseclick
 		if find:

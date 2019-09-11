@@ -67,7 +67,7 @@ func get_fname_identifier(object):
 	
 func get_persisting_winteractors():
 	# Get persisting worldinteractors
-	var kids = get_children()
+	var kids = get_node("Navigation/NavigationMeshInstance").get_children()
 	var wInteractors = []
 	for node in kids:
 		if node.is_class("WorldInteractor"):

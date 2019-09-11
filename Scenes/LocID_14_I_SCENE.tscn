@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/DOMAIN_Baseclass.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/HUD_Overlay.tscn" type="PackedScene" id=2]
@@ -7,8 +7,11 @@
 [ext_resource path="res://Scripts/WORLDINTERACTOR_baseclass.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Theke.tscn" type="PackedScene" id=6]
 
+[sub_resource type="NavigationMesh" id=1]
+vertices = PoolVector3Array( -17.806, -2.36809, -7.57641, -15.706, -2.36809, -7.57641, -13.606, -2.36809, -7.87641, -13.606, -2.36809, -10.2764, -19.906, -2.36809, -10.2764, -19.906, -2.36809, -7.87641, -17.806, -2.36809, 4.12359, -15.706, -2.36809, 4.12359, -15.706, -2.36809, -7.57641, -17.806, -2.36809, -7.57641, -13.606, -2.36809, -10.2764, -13.606, -2.36809, -7.87641, -11.806, -2.36809, -7.57641, -8.506, -2.36809, -10.2764, -11.806, -2.36809, 6.22359, -12.406, -2.36809, 6.52359, -8.506, -2.36809, 6.82359, -11.806, -2.36809, -0.676412, -11.806, -2.36809, 6.22359, -8.506, -2.36809, 6.82359, -8.506, -2.36809, -1.87641, -8.506, -2.36809, -1.87641, -8.506, -2.36809, -10.2764, -11.806, -2.36809, -7.57641, -11.806, -2.36809, -0.676412, -5.80599, -0.368092, -0.676412, -4.606, -0.368092, -0.376411, -4.606, -0.368092, -10.2764, -5.80599, -0.368092, -10.2764, -5.80599, -0.368092, -2.27641, -6.106, -2.36809, 8.32359, -7.606, -2.36809, 8.62359, -7.606, -2.36809, 10.4236, -3.40599, -2.36809, 6.82359, -5.80599, -2.36809, 7.12359, -6.106, -2.36809, 8.32359, -0.705996, -2.36809, 10.4236, -1.00599, -2.36809, 5.92359, -1.606, -2.36809, 5.62359, -3.40599, -2.36809, 6.82359, -3.40599, -2.36809, 6.82359, -6.106, -2.36809, 8.32359, -7.606, -2.36809, 10.4236, -0.705996, -2.36809, 10.4236, -1.606, -2.36809, -2.47641, -1.606, -2.36809, -10.2764, -3.40599, -2.36809, -10.2764, -3.40599, -2.36809, -1.87641, -3.40599, -2.36809, -1.87641, -3.40599, -2.36809, 6.82359, -1.606, -2.36809, 5.62359, -1.606, -2.36809, -2.47641, 1.694, -2.36809, 3.22359, 5.59401, -2.36809, 3.52359, 5.59401, -2.36809, -3.37641, 1.694, -2.36809, -3.67641, 1.694, -2.36809, -3.67641, 5.59401, -2.36809, -3.37641, 5.59401, -2.36809, -10.2764, 1.694, -2.36809, -10.2764, -19.906, 0.031908, -6.67641, -19.906, 0.031908, 5.32359, -19.006, 0.031908, 5.32359, -19.006, 0.031908, -6.67641, -14.506, 0.031908, -6.67641, -14.506, 0.031908, 5.32359, -13.006, 0.031908, 5.32359, -13.006, 0.031908, -6.67641, -19.906, -2.36809, -6.37641, -19.906, -2.36809, 5.02359, -19.306, -2.36809, 5.02359, -19.306, -2.36809, -6.37641, -14.206, -2.36809, -6.37641, -14.206, -2.36809, 5.02359, -13.306, -2.36809, 5.02359, -13.306, -2.36809, -6.37641, -5.80599, -0.368092, 0.823588, -5.80599, -0.368092, 5.92359, -4.606, -0.368092, 5.92359, -4.606, -0.368092, 0.523588, 5.59401, -2.36809, 3.52359, 1.694, -2.36809, 3.22359, 1.694, -2.36809, 5.02359, 0.794004, -2.36809, 5.92359, -1.00599, -2.36809, 5.92359, -0.705996, -2.36809, 10.4236, 5.59401, -2.36809, 3.52359, 1.694, -2.36809, 5.02359, 0.794004, -2.36809, 5.92359, -0.705996, -2.36809, 10.4236, 5.59401, -2.36809, 10.4236, -8.506, -2.36809, 10.7236, -7.606, -2.36809, 10.4236, -7.606, -2.36809, 8.62359, -8.506, -2.36809, 8.32359, -8.506, -2.36809, 10.7236, -8.506, -2.36809, 8.32359, -12.406, -2.36809, 6.52359, -15.406, -2.36809, 6.52359, -15.706, -2.36809, 4.12359, -17.806, -2.36809, 4.12359, -17.806, -2.36809, 6.22359, -15.406, -2.36809, 6.52359, -19.906, -2.36809, 23.3236, -8.506, -2.36809, 23.3236, -8.506, -2.36809, 17.0236, -19.906, -2.36809, 14.9236, -8.506, -2.36809, 8.32359, -8.506, -2.36809, 6.82359, -12.406, -2.36809, 6.52359, -15.406, -2.36809, 6.52359, -17.806, -2.36809, 6.22359, -19.906, -2.36809, 6.52359, -19.906, -2.36809, 14.9236, -8.506, -2.36809, 17.0236, -8.506, -2.36809, 10.7236 )
+polygons = [ PoolIntArray( 5, 0, 4 ), PoolIntArray( 0, 1, 4 ), PoolIntArray( 1, 2, 4 ), PoolIntArray( 2, 3, 4 ), PoolIntArray( 9, 6, 8 ), PoolIntArray( 6, 7, 8 ), PoolIntArray( 13, 10, 12 ), PoolIntArray( 10, 11, 12 ), PoolIntArray( 16, 14, 15 ), PoolIntArray( 20, 17, 19 ), PoolIntArray( 17, 18, 19 ), PoolIntArray( 24, 21, 23 ), PoolIntArray( 21, 22, 23 ), PoolIntArray( 28, 29, 27 ), PoolIntArray( 29, 25, 27 ), PoolIntArray( 25, 26, 27 ), PoolIntArray( 32, 30, 31 ), PoolIntArray( 35, 33, 34 ), PoolIntArray( 39, 36, 38 ), PoolIntArray( 36, 37, 38 ), PoolIntArray( 43, 40, 42 ), PoolIntArray( 40, 41, 42 ), PoolIntArray( 47, 44, 46 ), PoolIntArray( 44, 45, 46 ), PoolIntArray( 51, 48, 50 ), PoolIntArray( 48, 49, 50 ), PoolIntArray( 55, 52, 54 ), PoolIntArray( 52, 53, 54 ), PoolIntArray( 59, 56, 58 ), PoolIntArray( 56, 57, 58 ), PoolIntArray( 63, 60, 62 ), PoolIntArray( 60, 61, 62 ), PoolIntArray( 67, 64, 66 ), PoolIntArray( 64, 65, 66 ), PoolIntArray( 71, 68, 70 ), PoolIntArray( 68, 69, 70 ), PoolIntArray( 75, 72, 74 ), PoolIntArray( 72, 73, 74 ), PoolIntArray( 79, 76, 78 ), PoolIntArray( 76, 77, 78 ), PoolIntArray( 82, 80, 81 ), PoolIntArray( 85, 83, 84 ), PoolIntArray( 90, 86, 89 ), PoolIntArray( 86, 87, 89 ), PoolIntArray( 87, 88, 89 ), PoolIntArray( 94, 91, 93 ), PoolIntArray( 91, 92, 93 ), PoolIntArray( 98, 95, 97 ), PoolIntArray( 95, 96, 97 ), PoolIntArray( 102, 99, 101 ), PoolIntArray( 99, 100, 101 ), PoolIntArray( 106, 103, 105 ), PoolIntArray( 103, 104, 105 ), PoolIntArray( 109, 107, 108 ), PoolIntArray( 115, 110, 114 ), PoolIntArray( 110, 111, 114 ), PoolIntArray( 111, 112, 114 ), PoolIntArray( 112, 113, 114 ) ]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.300587, 2.74809, 3.49643 )
 
 [node name="World" type="Spatial"]
@@ -20,18 +23,23 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16834, -0.00110483, -3.29831 )
 visible = false
 
-[node name="StaticBody" parent="." instance=ExtResource( 4 )]
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 1 )
+
+[node name="StaticBody" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 4 )]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0 )
 
-[node name="Door" type="StaticBody" parent="."]
+[node name="Door" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50498, 0, -3.31263 )
 script = ExtResource( 5 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Door"]
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Door"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929883, 0, -0.474724 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[node name="Theke" parent="." instance=ExtResource( 6 )]
+[node name="Theke" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 6 )]
 transform = Transform( 0.671093, 0, 0, 0, 1, 0, 0, 0, 2.31914, -0.2256, -1.94054, -2.80634 )
 chest_inventory = {
 2: 20
