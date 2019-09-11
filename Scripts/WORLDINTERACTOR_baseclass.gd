@@ -18,7 +18,7 @@ export(int, "door", "button", "chest", "shop") var interactor_type = DOOR
 
 # Door variables
 export(String) var points_to = "res://Scenes/World.tscn"
-export(String) var door_describe_target = ""
+export(String) var door_describe_target := ""
 
 # Chest variables
 export(Dictionary) var chest_inventory = {}

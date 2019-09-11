@@ -4,6 +4,9 @@ onready var globals = get_node("/root/globals")
 onready var cam_on = true
 var savname
 
+# Info collectors
+var doorList := Dictionary()
+
 class_name Domain
 
 enum {
@@ -23,6 +26,9 @@ func _ready():
 		c.pause_mode = Node.PAUSE_MODE_STOP
 	$Control.pause_mode = Node.PAUSE_MODE_PROCESS
 	pause_mode = Node.PAUSE_MODE_PROCESS
+
+	# Collect all doors in the world and save in dictionary
+	doorList = collectDoorList()
 
 func _process(delta):
 	handle_input()
@@ -132,7 +138,7 @@ func mouse_n_cam_bool_helper(case):
 				return true
 	return false
 
-func handle_input():
+func handle_input() -> void:
 	# Formerly this function belonged to the player
 	if mouse_n_cam_bool_helper(FREE_MOUSE): # Uncapture mouse
 		capture_mouse_mode(false)
@@ -159,6 +165,16 @@ func handle_input():
 	if Input.is_action_just_pressed("ui_up") and not get_node("Control/Control").visible: # Switch scene tester
 		$Player.scene_changer.scene_change_and_fade("res://Scenes/World.tscn")
 	$Player.fps.text = str(Engine.get_frames_per_second())
+
+func collectDoorList() -> Dictionary:
+	var out := Dictionary()
+	for child in get_node("Navigation/NavigationMeshInstance").get_children():
+		if child.name.begins_with("Door"):
+			out[child.door_describe_target] = child
+		for grandchild in child.get_children():
+			if grandchild.name.begins_with("Door"):
+				out[grandchild.door_describe_target] = grandchild
+	return out
 
 # OVERRIDE so the type can be referred
 func get_class(): return "Domain"

@@ -79,6 +79,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02081, 0.04003, -1.67222 )
 script = ExtResource( 7 )
 points_to = "res://Scenes/Interior.tscn"
+door_describe_target = "Minihütte"
 
 [node name="Cube" type="MeshInstance" parent="Navigation/NavigationMeshInstance/TestBuilding/Door"]
 transform = Transform( 2.86577, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
