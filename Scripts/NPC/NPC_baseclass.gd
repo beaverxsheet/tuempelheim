@@ -22,6 +22,7 @@ var cvert : Dijkstra_Vertex
 var cgraph : Dijkstra_Graph
 var cvert_commands : Array
 var action_status : int
+var cgraph_path : Array
 
 enum {
 	IDLE,
@@ -35,6 +36,7 @@ func _ready():
 	globals.dijkstra(cgraph, "idle")
 	cvert = cgraph.get_vertex("idle")
 	cvert_commands = cvert.execArray
+	cgraph_path = globals.shortest(cgraph, "done")
 	print(globals.shortest(cgraph, "done"))
 	
 	gothisplace = owner.collectDoorList()["Bäckerei Wind"].global_transform.origin
@@ -50,15 +52,18 @@ func _physics_process(delta):
 			walk()
 	
 func _process(delta):
-	match cvert_commands[0][0]:
-		"NPC_PRINT":
-			print(cvert_commands[0][1][0])
-			cvert_commands.pop_front()
-		"NPC_WAIT":
-			print("moved on")
-			action_status = IDLE
-			yield(get_tree().create_timer(int(cvert_commands[0][1][0])), "timeout")
-			cvert_commands.pop_front()
+#	print(cvert_commands)
+	if cvert_commands.empty():
+		cgraph_traverse_step()
+	else:
+		match cvert_commands[0][0]:
+			"NPC_PRINT":
+				print(cvert_commands[0][1][0])
+				cvert_commands.pop_front()
+			"NPC_WAIT":
+				action_status = IDLE
+				yield(get_tree().create_timer(int(cvert_commands[0][1][0])), "timeout")
+				cvert_commands.pop_front()
 			
 
 func interact_onclick():
@@ -168,6 +173,12 @@ func walk() -> void:
 			move_and_slide(move_vec.normalized() * MOVE_SPEED, Vector3(0, 1, 0))
 	else:
 		look_at(Vector3(player.translation.x, translation.y, player.translation.z), Vector3(0, 1, 0))
+
+func cgraph_traverse_step() -> void:
+	print(cgraph_path)
+	cgraph_path.pop_front()
+	cvert = cgraph.get_vertex(cgraph_path[0])
+	cvert_commands = cvert.execArray
 
 # OVERRIDE so the type can be referred
 func get_class(): return "NPC"

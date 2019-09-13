@@ -16,7 +16,7 @@ NEWG | goaptest
 # VERT | getcash
 # VERT | goshopping
 VERT | getloaf
-VERT | bedone
+VERT | done
 VERT | idle
 VERT | walk
 EDGE | idle | walk | 1
