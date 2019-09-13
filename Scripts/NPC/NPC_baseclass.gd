@@ -24,6 +24,9 @@ var cvert_commands : Array
 var action_status : int
 var cgraph_path : Array
 
+var goap_goal : String
+var goap_base : String
+
 enum {
 	IDLE,
 	WALK,
@@ -33,11 +36,14 @@ enum {
 func _ready():
 	cgraph = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
 	
-	globals.dijkstra(cgraph, "idle")
-	cvert = cgraph.get_vertex("idle")
+	goap_base = "idle"
+	goap_goal = "done"
+	
+	globals.dijkstra(cgraph, goap_base)
+	cvert = cgraph.get_vertex(goap_base)
 	cvert_commands = cvert.execArray
-	cgraph_path = globals.shortest(cgraph, "done")
-	print(globals.shortest(cgraph, "done"))
+	cgraph_path = globals.shortest(cgraph, goap_goal)
+	print(cgraph_path)
 	
 	gothisplace = owner.collectDoorList()["Bäckerei Wind"].global_transform.origin
 
@@ -88,6 +94,14 @@ func choose_target_given_vector(target_delta):
 		return translation + target_delta
 	elif target_delta is Vector2:
 		return translation + Vector3(target_delta.x, target_delta.y, 0)
+
+func retract_to_goap_base() -> void:
+	"""
+	Once goal(s) have been achieved, return to idle state
+	To keep it at this idle state, set goal to equal base (current state)
+	"""
+	cvert = cgraph.get_vertex(goap_base)
+	goap_goal = goap_base
 
 func readSheet(filename):
 	# Read and return contents of a chat file NOT PARSED
@@ -175,10 +189,23 @@ func walk() -> void:
 		look_at(Vector3(player.translation.x, translation.y, player.translation.z), Vector3(0, 1, 0))
 
 func cgraph_traverse_step() -> void:
-	print(cgraph_path)
 	cgraph_path.pop_front()
 	cvert = cgraph.get_vertex(cgraph_path[0])
 	cvert_commands = cvert.execArray
+	cgraph_path = recalculate_goap_path()
+	
+func recalculate_goap_path() -> Array:
+	# Make new best path to new goal if applicable
+	globals.dijkstra(cgraph, cvert.id)
+	return globals.shortest(cgraph, goap_goal)
+	
+func restate_goap_goal() -> String:
+	"""
+	If something happens, it might become important for the NPC to have a different goal
+	Eg respond to an attack
+	Currently nothing will make the NPC restate that goal
+	"""
+	return goap_goal
 
 # OVERRIDE so the type can be referred
 func get_class(): return "NPC"
