@@ -1,4 +1,5 @@
 extends Node
+class_name Dijkstra_Graph
 # Props to Bogotobogo.com and their python implementation
 
 var vertex = preload("res://Scripts/NPC/Dijkstra_Vertex.gd")

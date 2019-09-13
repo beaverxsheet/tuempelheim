@@ -15,21 +15,27 @@ var vertex = preload("res://Scripts/NPC/Dijkstra_Vertex.gd")
 var graph = preload("res://Scripts/NPC/Dijkstra_Graph.gd")
 
 export(int) var NPCID = 0
-export(int, "idle", "walk_idle", "seek") var interactor_type = WALK_IDLE
+export(int, "idle", "walk", "seek") var interactor_type = IDLE
 
 var gothisplace
+var cvert : Dijkstra_Vertex
+var cgraph : Dijkstra_Graph
+var cvert_commands : Array
+var action_status : int
 
 enum {
 	IDLE,
-	WALK_IDLE,
+	WALK,
 	SEEK
 }
 
 func _ready():
-	var g = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
-
-	globals.dijkstra(g, "idle")
-	# print(globals.shortest(g, "done"))
+	cgraph = parseSheetGOAP(readSheet("res://Testers/definition.goapml"))
+	
+	globals.dijkstra(cgraph, "idle")
+	cvert = cgraph.get_vertex("idle")
+	cvert_commands = cvert.execArray
+	print(globals.shortest(cgraph, "done"))
 	
 	gothisplace = owner.collectDoorList()["Bäckerei Wind"].global_transform.origin
 
@@ -37,8 +43,23 @@ func _ready():
 #	print(owner.collectDoorList()["Minihütte"].global_transform.origin)
 
 func _physics_process(delta):
-	walk()
+	match action_status:
+		IDLE:
+			pass
+		WALK:
+			walk()
 	
+func _process(delta):
+	match cvert_commands[0][0]:
+		"NPC_PRINT":
+			print(cvert_commands[0][1][0])
+			cvert_commands.pop_front()
+		"NPC_WAIT":
+			print("moved on")
+			action_status = IDLE
+			yield(get_tree().create_timer(int(cvert_commands[0][1][0])), "timeout")
+			cvert_commands.pop_front()
+			
 
 func interact_onclick():
 	get_parent().capture_mouse_mode(false)
@@ -136,7 +157,6 @@ func parseCommandsGOAP(vert, _funcname, _queuepos, arguments):
 			"self":
 				byPos[i] = self
 	vert.add_execArray_step([funcname, byPos, queuepos])
-	print(vert.execArray)
 
 func walk() -> void:
 	if path_ind < path.size():

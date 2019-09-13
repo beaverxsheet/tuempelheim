@@ -1,4 +1,5 @@
 extends Node
+class_name Dijkstra_Vertex
 # Props to Bogotobogo.com and their python implementation
 
 var id; var adjacent; var distance; var visited; var previous; var execArray;

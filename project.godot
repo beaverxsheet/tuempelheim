@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Dijkstra_Graph",
+"language": "GDScript",
+"path": "res://Scripts/NPC/Dijkstra_Graph.gd"
+}, {
+"base": "Node",
+"class": "Dijkstra_Vertex",
+"language": "GDScript",
+"path": "res://Scripts/NPC/Dijkstra_Vertex.gd"
+}, {
 "base": "Spatial",
 "class": "Domain",
 "language": "GDScript",
@@ -30,6 +40,8 @@ _global_script_classes=[ {
 "path": "res://Scripts/WORLDINTERACTOR_baseclass.gd"
 } ]
 _global_script_class_icons={
+"Dijkstra_Graph": "",
+"Dijkstra_Vertex": "",
 "Domain": "",
 "Ingame_Item": "",
 "NPC": "",
