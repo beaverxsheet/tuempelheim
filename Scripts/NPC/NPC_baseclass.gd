@@ -7,7 +7,6 @@ var path = []
 var path_ind = 0
 const MOVE_SPEED = 10
 const RUN_SPEED = 30
-const GRAV = -10
 
 onready var globals = get_node("/root/globals")
 onready var nav = get_parent().get_node("Navigation")
@@ -32,9 +31,10 @@ func _ready():
 	globals.dijkstra(g, "idle")
 	# print(globals.shortest(g, "done"))
 	
-#	gothisplace = choose_target_given_vector(Vector3(100, 0, 0))
+	gothisplace = owner.collectDoorList()["Bäckerei Wind"].global_transform.origin
 
-	path = nav.get_simple_path(translation, get_parent().get_node("Position3D").translation)
+	path = nav.get_simple_path(translation, gothisplace)
+#	print(owner.collectDoorList()["Minihütte"].global_transform.origin)
 
 func _physics_process(delta):
 	walk()
@@ -138,7 +138,7 @@ func parseCommandsGOAP(vert, _funcname, _queuepos, arguments):
 	vert.add_execArray_step([funcname, byPos, queuepos])
 	print(vert.execArray)
 
-func walk():
+func walk() -> void:
 	if path_ind < path.size():
 		var move_vec = (path[path_ind] - translation)
 		move_vec.y = 0

@@ -43,7 +43,7 @@ extents = Vector3( 1, 1, 0.142593 )
 script = ExtResource( 1 )
 
 [node name="Position3D" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 6, 3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 5, 42 )
 
 [node name="Control" parent="." instance=ExtResource( 2 )]
 
@@ -75,14 +75,13 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86524, 9.81871 )
 
 [node name="Door" type="StaticBody" parent="Navigation/NavigationMeshInstance/TestBuilding"]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02081, 0.04003, -1.67222 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021, 0, -1.672 )
 script = ExtResource( 7 )
 points_to = "res://Scenes/Interior.tscn"
 door_describe_target = "Minihütte"
 
 [node name="Cube" type="MeshInstance" parent="Navigation/NavigationMeshInstance/TestBuilding/Door"]
-transform = Transform( 2.86577, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform = Transform( 2.8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 4 )
 material/0 = ExtResource( 8 )
 
@@ -93,4 +92,5 @@ shape = SubResource( 5 )
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -29, 5, 124 )
 
 [node name="LocID_14" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 10 )]
+editor/display_folded = true
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -29, 3, 0 )

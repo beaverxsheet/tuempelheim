@@ -27,8 +27,6 @@ export(Dictionary) var chest_inventory = {}
 export(int) var money = 0
 export(bool) var can_shop_buy = false
 
-
-
 func interact_onclick():
 	match interactor_type:
 		DOOR:
